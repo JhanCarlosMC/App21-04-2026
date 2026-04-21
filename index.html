@@ -278,6 +278,101 @@
             object-fit: contain;
         }
 
+        /* Video optimization styles */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(199, 86, 72, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .video-play-btn::after {
+            content: '▶';
+            color: white;
+            font-size: 24px;
+            margin-left: 4px;
+        }
+
+        .photo-card:hover .video-play-btn {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: rgba(199, 86, 72, 0.9);
+        }
+
+        .video-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--color-terracotta);
+            font-size: 14px;
+            z-index: 5;
+        }
+
+        .video-error {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--color-brown);
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            z-index: 5;
+            font-size: 14px;
+            max-width: 80%;
+        }
+
+        /* Low bandwidth mode */
+        .video-container.low-bandwidth .video-thumbnail {
+            display: flex;
+        }
+
+        .video-container.low-bandwidth video {
+            display: none;
+        }
+
+        /* Video thumbnail placeholder */
+        .video-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFD1DC 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-terracotta);
+            font-size: 48px;
+            z-index: 1;
+        }
+
+        .video-thumbnail.loaded {
+            display: none;
+        }
+
         .photo-card.featured .caption {
             font-size: 1.5rem;
             color: var(--color-coral);
@@ -487,6 +582,42 @@
             }
         }
 
+        // Optimize video loading with Intersection Observer
+        function setupVideoObserver() {
+            // Check for slow connection or data saver mode
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            const isSlowConnection = connection && (connection.saveData || (connection.effectiveType && connection.effectiveType.includes('2g')));
+
+            const videoOptions = {
+                root: null,
+                rootMargin: '100px',
+                threshold: 0.1
+            };
+
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target.querySelector('video');
+                        const container = entry.target.querySelector('.video-container');
+
+                        if (isSlowConnection && container) {
+                            container.classList.add('low-bandwidth');
+                        } else if (video && video.readyState === 0) {
+                            // Preload video when it's about to enter viewport
+                            video.setAttribute('preload', 'metadata');
+                        }
+                    }
+                });
+            }, videoOptions);
+
+            // Observe all video cards
+            document.querySelectorAll('.photo-card').forEach(card => {
+                if (card.querySelector('video')) {
+                    videoObserver.observe(card);
+                }
+            });
+        }
+
         // Update time counter
         function updateTimeCounter() {
             // 21 de marzo 2026 a las 11pm
@@ -590,11 +721,118 @@
                 const isVideo = photoObj.file.endsWith('.MOV') || photoObj.file.endsWith('.mp4');
 
                 if (isVideo) {
+                    // Create optimized video structure
                     card.innerHTML = `
-                        <video src="${photoDir}${photoObj.file}" muted loop playsinline
-                            onmouseover="this.play()" onmouseout="this.pause()"></video>
+                        <div class="video-container">
+                            <div class="video-thumbnail">🎬</div>
+                            <video
+                                src="${photoDir}${photoObj.file}"
+                                preload="none"
+                                muted
+                                loop
+                                playsinline
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 2px;"
+                            ></video>
+                            <div class="video-play-btn" style="display: none;"></div>
+                            <div class="video-loading" style="display: none;">Cargando...</div>
+                        </div>
                         <div class="caption">${photoObj.caption}</div>
                     `;
+
+                    // Enhanced video handling with optimization
+                    const video = card.querySelector('video');
+                    const thumbnail = card.querySelector('.video-thumbnail');
+                    const playBtn = card.querySelector('.video-play-btn');
+                    const loading = card.querySelector('.video-loading');
+
+                    // Load video only when needed
+                    const loadVideo = () => {
+                        if (video.readyState === 0) { // Not loaded
+                            loading.style.display = 'block';
+                            thumbnail.style.display = 'none';
+
+                            video.load().then(() => {
+                                loading.style.display = 'none';
+                                thumbnail.classList.add('loaded');
+                            }).catch(() => {
+                                loading.style.display = 'none';
+                                thumbnail.innerHTML = '❌ Video no disponible';
+                                thumbnail.style.display = 'flex';
+                            });
+                        }
+                    };
+
+                    // Optimized play/pause handling
+                    card.addEventListener('click', function(e) {
+                        e.stopPropagation();
+
+                        // Load video first time
+                        loadVideo();
+
+                        if (video.paused) {
+                            // Pause all other videos
+                            document.querySelectorAll('video').forEach(v => {
+                                if (v !== video) v.pause();
+                            });
+
+                            video.play().then(() => {
+                                thumbnail.classList.add('loaded');
+                                playBtn.style.display = 'none';
+                            }).catch(() => {
+                                // Handle autoplay restrictions
+                                playBtn.style.display = 'flex';
+                            });
+                        } else {
+                            video.pause();
+                            playBtn.style.display = 'flex';
+                        }
+
+                        // Toggle active class
+                        document.querySelectorAll('.photo-card').forEach(c => {
+                            if (c !== card) c.classList.remove('active');
+                        });
+                        card.classList.toggle('active');
+                    });
+
+                    // Mouse hover for desktop
+                    card.addEventListener('mouseenter', function() {
+                        loadVideo();
+                        video.play().catch(() => {});
+                    });
+
+                    card.addEventListener('mouseleave', function() {
+                        if (!card.classList.contains('active')) {
+                            video.pause();
+                        }
+                    });
+
+                    // Show play button on hover
+                    card.addEventListener('mouseenter', function() {
+                        playBtn.style.display = 'flex';
+                    });
+
+                    card.addEventListener('mouseleave', function() {
+                        if (!video.paused) {
+                            playBtn.style.display = 'none';
+                        }
+                    });
+
+                    // Handle video events
+                    video.addEventListener('loadstart', () => {
+                        loading.style.display = 'block';
+                    });
+
+                    video.addEventListener('canplay', () => {
+                        loading.style.display = 'none';
+                        thumbnail.classList.add('loaded');
+                    });
+
+                    video.addEventListener('error', () => {
+                        loading.style.display = 'none';
+                        thumbnail.innerHTML = '❌ Error al cargar';
+                        thumbnail.style.display = 'flex';
+                    });
+
                 } else {
                     card.innerHTML = `
                         <img src="${photoDir}${photoObj.file}" alt="${photoObj.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
@@ -602,15 +840,15 @@
                     `;
                 }
 
-                // Enhanced video handling for touch devices
-                if (isVideo) {
-                    const video = card.querySelector('video');
-                    card.addEventListener('click', function(e) {
-                        if (!card.classList.contains('active')) {
-                            video.play();
-                        } else {
-                            video.pause();
-                        }
+                // Add touch/click handling for non-video cards
+                if (!isVideo) {
+                    card.addEventListener('click', function() {
+                        // Remove active class from all other cards
+                        document.querySelectorAll('.photo-card').forEach(c => {
+                            if (c !== this) c.classList.remove('active');
+                        });
+                        // Toggle active class on clicked card
+                        this.classList.toggle('active');
                     });
                 }
 
@@ -642,6 +880,9 @@
             loadPhotos();
             updateTimeCounter();
             setInterval(updateTimeCounter, 1000);
+
+            // Setup video optimization after photos are loaded
+            setTimeout(setupVideoObserver, 1000);
         });
     </script>
 </body>

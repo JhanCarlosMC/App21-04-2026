@@ -278,7 +278,7 @@
             object-fit: contain;
         }
 
-        /* Video optimization styles */
+        /* Video preview styles */
         .video-container {
             position: relative;
             width: 100%;
@@ -288,68 +288,51 @@
             justify-content: center;
         }
 
-        .video-play-btn {
+        .video-preview-overlay {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: rgba(199, 86, 72, 0.8);
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease;
             z-index: 10;
-            pointer-events: none;
+            opacity: 1;
+            border-radius: 2px;
         }
 
-        .video-play-btn::after {
-            content: '▶';
-            color: white;
-            font-size: 24px;
-            margin-left: 4px;
-        }
-
-        .photo-card:hover .video-play-btn {
-            transform: translate(-50%, -50%) scale(1.1);
+        .play-icon {
+            width: 70px;
+            height: 70px;
             background: rgba(199, 86, 72, 0.9);
-        }
-
-        .video-loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--color-terracotta);
-            font-size: 14px;
-            z-index: 5;
-        }
-
-        .video-error {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--color-brown);
-            text-align: center;
-            padding: 20px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 10px;
-            z-index: 5;
-            font-size: 14px;
-            max-width: 80%;
-        }
-
-        /* Low bandwidth mode */
-        .video-container.low-bandwidth .video-thumbnail {
+            border-radius: 50%;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            margin-left: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
 
-        .video-container.low-bandwidth video {
-            display: none;
+        .photo-card:hover .play-icon {
+            transform: scale(1.1);
+            background: rgba(199, 86, 72, 1);
+        }
+
+        .video-preview-overlay:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hide overlay when video is playing */
+        .video-container.playing .video-preview-overlay {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* Video thumbnail placeholder */
@@ -377,6 +360,10 @@
             font-size: 1.5rem;
             color: var(--color-coral);
             font-weight: 600;
+        }
+
+        .video-thumbnail.loaded {
+            display: none;
         }
 
         .photo-card img,
@@ -748,71 +735,77 @@
                 const isVideo = photoObj.file.endsWith('.MOV') || photoObj.file.endsWith('.mp4');
 
                 if (isVideo) {
-                    // Create optimized video structure
+                    // Create video with elegant preview
+                    const videoPoster = `${photoDir}${photoObj.file.replace(/\.(MOV|mp4|MOV)$/i, '.jpg')}`;
+
                     card.innerHTML = `
                         <div class="video-container">
-                            <div class="video-thumbnail">🎬</div>
                             <video
                                 src="${photoDir}${photoObj.file}"
-                                preload="none"
+                                preload="metadata"
                                 muted
                                 loop
                                 playsinline
+                                poster=""
                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 2px;"
                             ></video>
-                            <div class="video-play-btn" style="display: none;"></div>
-                            <div class="video-loading" style="display: none;">Cargando...</div>
+                            <div class="video-preview-overlay">
+                                <div class="play-icon">▶</div>
+                            </div>
                         </div>
                         <div class="caption">${photoObj.caption}</div>
                     `;
 
-                    // Enhanced video handling with optimization
+                    // Enhanced video handling
                     const video = card.querySelector('video');
-                    const thumbnail = card.querySelector('.video-thumbnail');
-                    const playBtn = card.querySelector('.video-play-btn');
-                    const loading = card.querySelector('.video-loading');
+                    const previewOverlay = card.querySelector('.video-preview-overlay');
+                    const playIcon = card.querySelector('.play-icon');
 
-                    // Load video only when needed
-                    const loadVideo = () => {
-                        if (video.readyState === 0) { // Not loaded
-                            loading.style.display = 'block';
-                            thumbnail.style.display = 'none';
+                    // Capture first frame as poster preview
+                    video.addEventListener('loadedmetadata', function() {
+                        // Create a canvas to capture the first frame
+                        const canvas = document.createElement('canvas');
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        const ctx = canvas.getContext('2d');
 
-                            video.load().then(() => {
-                                loading.style.display = 'none';
-                                thumbnail.classList.add('loaded');
-                            }).catch(() => {
-                                loading.style.display = 'none';
-                                thumbnail.innerHTML = '❌ Video no disponible';
-                                thumbnail.style.display = 'flex';
-                            });
-                        }
-                    };
+                        // Seek to first frame and capture
+                        video.currentTime = 0.1; // Small delay to ensure frame is available
 
-                    // Optimized play/pause handling
-                    card.addEventListener('click', function(e) {
-                        e.stopPropagation();
+                        video.addEventListener('seeked', function onSeeked() {
+                            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                            const posterUrl = canvas.toDataURL('image/jpeg', 0.7);
+                            video.poster = posterUrl;
+                            video.removeEventListener('seeked', onSeeked);
+                        }, { once: true });
+                    });
 
-                        // Load video first time
-                        loadVideo();
-
+                    // Play/Pause handling
+                    const togglePlay = () => {
                         if (video.paused) {
                             // Pause all other videos
                             document.querySelectorAll('video').forEach(v => {
-                                if (v !== video) v.pause();
+                                if (v !== video && !v.paused) v.pause();
                             });
 
                             video.play().then(() => {
-                                thumbnail.classList.add('loaded');
-                                playBtn.style.display = 'none';
+                                previewOverlay.style.opacity = '0';
+                                previewOverlay.style.pointerEvents = 'none';
                             }).catch(() => {
-                                // Handle autoplay restrictions
-                                playBtn.style.display = 'flex';
+                                previewOverlay.style.opacity = '1';
+                                previewOverlay.style.pointerEvents = 'auto';
                             });
                         } else {
                             video.pause();
-                            playBtn.style.display = 'flex';
+                            previewOverlay.style.opacity = '1';
+                            previewOverlay.style.pointerEvents = 'auto';
                         }
+                    };
+
+                    // Click to play
+                    card.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        togglePlay();
 
                         // Toggle active class
                         document.querySelectorAll('.photo-card').forEach(c => {
@@ -823,8 +816,24 @@
 
                     // Mouse hover for desktop
                     card.addEventListener('mouseenter', function() {
-                        loadVideo();
-                        video.play().catch(() => {});
+                        previewOverlay.style.opacity = '1';
+                    });
+
+                    card.addEventListener('mouseleave', function() {
+                        if (!video.paused) {
+                            previewOverlay.style.opacity = '0';
+                        }
+                    });
+
+                    // Show overlay when video ends
+                    video.addEventListener('ended', function() {
+                        previewOverlay.style.opacity = '1';
+                        previewOverlay.style.pointerEvents = 'auto';
+                    });
+
+                    // Handle video errors
+                    video.addEventListener('error', function() {
+                        previewOverlay.innerHTML = '<div class="play-icon" style="background: rgba(255,0,0,0.7);">❌</div>';
                     });
 
                     card.addEventListener('mouseleave', function() {

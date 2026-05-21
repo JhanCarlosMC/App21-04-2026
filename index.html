@@ -25,12 +25,54 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Source Sans 3', sans-serif;
             background: linear-gradient(135deg, #FADADD 0%, #FFB6C9 50%, #FFA0B4 100%);
             color: var(--color-dark);
             overflow-x: hidden;
             position: relative;
+        }
+
+        .month-nav {
+            position: fixed;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.58);
+            border: 1px solid rgba(193, 86, 72, 0.18);
+            box-shadow: 0 12px 30px rgba(199, 86, 72, 0.18);
+            backdrop-filter: blur(12px);
+        }
+
+        .month-nav a {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            color: var(--color-terracotta);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: background 0.25s ease, transform 0.25s ease, color 0.25s ease;
+        }
+
+        .month-nav a:hover,
+        .month-nav a:focus {
+            background: var(--color-terracotta);
+            color: white;
+            transform: scale(1.08);
+            outline: none;
         }
 
         body::before {
@@ -95,12 +137,16 @@
             position: relative;
             width: min(900px, 100%);
             height: clamp(280px, 52vw, 520px);
-            margin: 45px auto 0;
+            margin: 0 auto;
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 22px 55px rgba(199, 86, 72, 0.28);
             border: 6px solid rgba(255, 255, 255, 0.78);
             background: rgba(255, 255, 255, 0.5);
+        }
+
+        .recap-section {
+            margin: 30px 0 80px;
         }
 
         .recap-slide {
@@ -550,6 +596,18 @@
                 font-size: 2.5rem;
             }
 
+            .month-nav {
+                right: 12px;
+                padding: 7px;
+                gap: 7px;
+            }
+
+            .month-nav a {
+                width: 32px;
+                height: 32px;
+                font-size: 0.82rem;
+            }
+
             .gallery-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -597,13 +655,16 @@
 </head>
 <body>
     <div class="floating-hearts" id="hearts"></div>
+    <nav class="month-nav" aria-label="Navegación por mes">
+        <a href="#primer-mes" aria-label="Ir al primer mes">1</a>
+        <a href="#segundo-mes" aria-label="Ir al segundo mes">2</a>
+    </nav>
 
     <div class="container">
         <section class="hero">
             <h1>Dos Meses Juntos</h1>
             <p class="subtitle">Un recap de todo lo bonito que hemos vivido</p>
             <div class="heart">❤️</div>
-            <div class="recap-carousel" id="recapCarousel" aria-label="Recap de nuestros momentos"></div>
         </section>
 
         <section class="time-counter">
@@ -626,6 +687,10 @@
                     <div class="label">Segundos</div>
                 </div>
             </div>
+        </section>
+
+        <section class="recap-section">
+            <div class="recap-carousel" id="recapCarousel" aria-label="Recap de nuestros momentos"></div>
         </section>
 
         <section class="messages">
@@ -783,16 +848,17 @@
         function setupRecapCarousel() {
             const carousel = document.getElementById('recapCarousel');
             const recapPhotos = [
-                monthCollections[0].photos[0],
-                monthCollections[0].photos[5],
-                monthCollections[0].photos[30],
-                monthCollections[1].photos[0],
-                monthCollections[1].photos[8],
-                monthCollections[1].photos[23]
-            ].map((photo, index) => ({
-                ...photo,
-                month: index < 3 ? monthCollections[0].key : monthCollections[1].key
-            })).filter(photo => !isVideoFile(photo.file));
+                { month: 'Primer Mes', file: 'Especial.JPG' },
+                { month: 'Primer Mes', file: 'IMG_7074.JPG' },
+                { month: 'Primer Mes', file: 'IMG_7483.JPG' },
+                { month: 'Segundo Mes', file: 'IMG_9100.JPG' },
+                { month: 'Segundo Mes', file: 'IMG_9030.JPG' },
+                { month: 'Segundo Mes', file: 'IMG_9052.JPG' }
+            ].map((item) => {
+                const collection = monthCollections.find(month => month.key === item.month);
+                const photo = collection.photos.find(photoObj => photoObj.file === item.file);
+                return { ...photo, month: item.month };
+            }).filter(photo => photo.file && !isVideoFile(photo.file));
 
             carousel.innerHTML = recapPhotos.map((photo, index) => `
                 <div class="recap-slide ${index === 0 ? 'active' : ''}">
@@ -979,6 +1045,7 @@
             monthCollections.forEach((month) => {
                 const section = document.createElement('section');
                 section.className = 'month-section';
+                section.id = month.key.toLowerCase().replace(/\s+/g, '-');
 
                 section.innerHTML = `
                     <div class="month-heading">

@@ -229,6 +229,8 @@
             opacity: 0;
             animation: photoAppear 0.8s ease forwards;
             border: 2px solid rgba(255, 182, 193, 0.4);
+            content-visibility: auto;
+            contain-intrinsic-size: 430px 430px;
         }
 
         .photo-card:hover,
@@ -375,6 +377,10 @@
             border-radius: 2px;
             background: #f5f5f5;
             transition: all 0.4s ease;
+        }
+
+        .photo-card img {
+            aspect-ratio: 4 / 3;
         }
 
         .photo-card:hover img,
@@ -617,8 +623,7 @@
                         if (isSlowConnection && container) {
                             container.classList.add('low-bandwidth');
                         } else if (video && video.readyState === 0) {
-                            // Preload video when it's about to enter viewport
-                            video.setAttribute('preload', 'metadata');
+                            video.dataset.nearViewport = 'true';
                         }
                     }
                 });
@@ -654,6 +659,21 @@
         async function loadPhotos() {
             const gallery = document.getElementById('gallery');
             const photoDir = 'iCloud Photos (1)/iCloud Photos/';
+            const optimizedDir = 'assets/optimized/';
+            const optimizedSrc = (file) => `${optimizedDir}${file.replace(/\.[^.]+$/, '.webp')}`;
+            const originalSrc = (file) => `${photoDir}${file}`;
+            const setOnlyActive = (selectedCard) => {
+                document.querySelectorAll('.photo-card').forEach(c => {
+                    if (c !== selectedCard) c.classList.remove('active');
+                });
+                selectedCard.classList.toggle('active');
+            };
+            const loadVideoSource = (video, file) => {
+                if (!video.src) {
+                    video.src = originalSrc(file);
+                    video.load();
+                }
+            };
 
             // Photos with Especial.JPG first and featured
             const photos = [
@@ -735,18 +755,15 @@
                 const isVideo = photoObj.file.endsWith('.MOV') || photoObj.file.endsWith('.mp4');
 
                 if (isVideo) {
-                    // Create video with elegant preview
-                    const videoPoster = `${photoDir}${photoObj.file.replace(/\.(MOV|mp4|MOV)$/i, '.jpg')}`;
-
                     card.innerHTML = `
                         <div class="video-container">
                             <video
-                                src="${photoDir}${photoObj.file}"
-                                preload="metadata"
+                                data-src="${originalSrc(photoObj.file)}"
+                                preload="none"
                                 muted
                                 loop
                                 playsinline
-                                poster=""
+                                poster="${optimizedSrc(photoObj.file)}"
                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 2px;"
                             ></video>
                             <div class="video-preview-overlay">
@@ -759,27 +776,6 @@
                     // Enhanced video handling
                     const video = card.querySelector('video');
                     const previewOverlay = card.querySelector('.video-preview-overlay');
-                    const playIcon = card.querySelector('.play-icon');
-
-                    // Capture first frame as poster preview
-                    video.addEventListener('loadedmetadata', function() {
-                        // Create a canvas to capture the first frame
-                        const canvas = document.createElement('canvas');
-                        canvas.width = video.videoWidth;
-                        canvas.height = video.videoHeight;
-                        const ctx = canvas.getContext('2d');
-
-                        // Seek to first frame and capture
-                        video.currentTime = 0.1; // Small delay to ensure frame is available
-
-                        video.addEventListener('seeked', function onSeeked() {
-                            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                            const posterUrl = canvas.toDataURL('image/jpeg', 0.7);
-                            video.poster = posterUrl;
-                            video.removeEventListener('seeked', onSeeked);
-                        }, { once: true });
-                    });
-
                     // Play/Pause handling
                     const togglePlay = () => {
                         if (video.paused) {
@@ -788,6 +784,7 @@
                                 if (v !== video && !v.paused) v.pause();
                             });
 
+                            loadVideoSource(video, photoObj.file);
                             video.play().then(() => {
                                 previewOverlay.style.opacity = '0';
                                 previewOverlay.style.pointerEvents = 'none';
@@ -806,12 +803,7 @@
                     card.addEventListener('click', function(e) {
                         e.stopPropagation();
                         togglePlay();
-
-                        // Toggle active class
-                        document.querySelectorAll('.photo-card').forEach(c => {
-                            if (c !== card) c.classList.remove('active');
-                        });
-                        card.classList.toggle('active');
+                        setOnlyActive(card);
                     });
 
                     // Mouse hover for desktop
@@ -842,36 +834,17 @@
                         }
                     });
 
-                    // Show play button on hover
-                    card.addEventListener('mouseenter', function() {
-                        playBtn.style.display = 'flex';
-                    });
-
-                    card.addEventListener('mouseleave', function() {
-                        if (!video.paused) {
-                            playBtn.style.display = 'none';
-                        }
-                    });
-
-                    // Handle video events
-                    video.addEventListener('loadstart', () => {
-                        loading.style.display = 'block';
-                    });
-
-                    video.addEventListener('canplay', () => {
-                        loading.style.display = 'none';
-                        thumbnail.classList.add('loaded');
-                    });
-
-                    video.addEventListener('error', () => {
-                        loading.style.display = 'none';
-                        thumbnail.innerHTML = '❌ Error al cargar';
-                        thumbnail.style.display = 'flex';
-                    });
-
                 } else {
                     card.innerHTML = `
-                        <img src="${photoDir}${photoObj.file}" alt="${photoObj.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img
+                            src="${optimizedSrc(photoObj.file)}"
+                            data-original="${originalSrc(photoObj.file)}"
+                            alt="${photoObj.caption}"
+                            loading="${photoObj.featured ? 'eager' : 'lazy'}"
+                            decoding="async"
+                            fetchpriority="${photoObj.featured ? 'high' : 'auto'}"
+                            onerror="if (this.dataset.original && this.src !== this.dataset.original) { this.src = this.dataset.original; this.dataset.original = ''; } else { this.parentElement.style.display='none'; }"
+                        >
                         <div class="caption">${photoObj.caption}</div>
                     `;
                 }
@@ -879,24 +852,9 @@
                 // Add touch/click handling for non-video cards
                 if (!isVideo) {
                     card.addEventListener('click', function() {
-                        // Remove active class from all other cards
-                        document.querySelectorAll('.photo-card').forEach(c => {
-                            if (c !== this) c.classList.remove('active');
-                        });
-                        // Toggle active class on clicked card
-                        this.classList.toggle('active');
+                        setOnlyActive(this);
                     });
                 }
-
-                // Add touch/click handling for mobile
-                card.addEventListener('click', function() {
-                    // Remove active class from all other cards
-                    document.querySelectorAll('.photo-card').forEach(c => {
-                        if (c !== this) c.classList.remove('active');
-                    });
-                    // Toggle active class on clicked card
-                    this.classList.toggle('active');
-                });
 
                 // Handle keyboard events
                 card.addEventListener('keydown', function(e) {

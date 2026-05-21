@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Un Mes Juntos ❤️</title>
+    <title>Dos Meses Juntos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
@@ -89,6 +89,49 @@
             margin-top: 30px;
             display: inline-block;
             animation: heartbeat 1.5s ease infinite;
+        }
+
+        .recap-carousel {
+            position: relative;
+            width: min(900px, 100%);
+            height: clamp(280px, 52vw, 520px);
+            margin: 45px auto 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 22px 55px rgba(199, 86, 72, 0.28);
+            border: 6px solid rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .recap-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .recap-slide.active {
+            opacity: 1;
+        }
+
+        .recap-slide img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .recap-caption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 28px 24px 24px;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.65);
+            background: linear-gradient(to top, rgba(45, 27, 27, 0.72), rgba(45, 27, 27, 0));
         }
 
         @keyframes fadeInUp {
@@ -215,6 +258,29 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             padding: 20px;
+        }
+
+        .month-section {
+            margin-bottom: 80px;
+        }
+
+        .month-heading {
+            text-align: center;
+            margin: 10px auto 20px;
+            max-width: 780px;
+        }
+
+        .month-heading h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            color: var(--color-terracotta);
+            margin-bottom: 8px;
+        }
+
+        .month-heading p {
+            color: var(--color-brown);
+            font-size: 1.05rem;
+            line-height: 1.6;
         }
 
         .photo-card {
@@ -534,24 +600,25 @@
 
     <div class="container">
         <section class="hero">
-            <h1>Un Mes Juntos</h1>
-            <p class="subtitle">Cada momento a tu lado es un regalo que atesoro</p>
+            <h1>Dos Meses Juntos</h1>
+            <p class="subtitle">Un recap de todo lo bonito que hemos vivido</p>
             <div class="heart">❤️</div>
+            <div class="recap-carousel" id="recapCarousel" aria-label="Recap de nuestros momentos"></div>
         </section>
 
         <section class="time-counter">
             <h2>Tiempo Juntos</h2>
             <div class="counter-grid">
                 <div class="counter-item">
-                    <div class="number" id="days">30</div>
+                    <div class="number" id="days">60</div>
                     <div class="label">Días</div>
                 </div>
                 <div class="counter-item">
-                    <div class="number" id="hours">720</div>
+                    <div class="number" id="hours">1,440</div>
                     <div class="label">Horas</div>
                 </div>
                 <div class="counter-item">
-                    <div class="number" id="minutes">43,200</div>
+                    <div class="number" id="minutes">86,400</div>
                     <div class="label">Minutos</div>
                 </div>
                 <div class="counter-item">
@@ -563,10 +630,10 @@
 
         <section class="messages">
             <div class="message-card">
-                <p>En este mes, me has enseñado que el amor verdadero no se mide en tiempo, sino en la cantidad de momentos que nos hacen sonreír.</p>
+                <p>En estos dos meses, me has enseñado que el amor verdadero no se mide en tiempo, sino en la cantidad de momentos que nos hacen sonreír.</p>
             </div>
             <div class="message-card">
-                <p>Cada foto aquí cuenta una historia, pero mi historia favorita es la que estamos escribiendo juntos día a día.</p>
+                <p>Cada mes tiene sus propias historias, pero mi favorita sigue siendo la que estamos escribiendo juntos día a día.</p>
             </div>
             <div class="message-card">
                 <p>Gracias por ser mi compañera, mi mejor amiga, y el motivo de mis sonrisas. Te amo más de lo que las palabras pueden expresar.</p>
@@ -574,8 +641,8 @@
         </section>
 
         <section class="gallery">
-            <h2 class="gallery-title">Nuestros Momentos</h2>
-            <div class="gallery-grid" id="gallery">
+            <h2 class="gallery-title">Nuestros Momentos Por Mes</h2>
+            <div id="gallery">
                 <!-- Photos will be loaded dynamically -->
             </div>
         </section>
@@ -587,7 +654,118 @@
     </div>
 
     <script>
-        // Create floating hearts
+        const monthCollections = [
+            {
+                key: 'Primer Mes',
+                title: 'Primer Mes',
+                description: 'El comienzo de esta historia, con las fotos tal como estaban en nuestro primer recuerdo.',
+                photos: [
+                    { file: 'Especial.JPG', caption: 'Nuestro momento especial 🎀✨', featured: true },
+                    { file: '1703eb87-a44a-45da-8c39-062432164d91.jpg', caption: 'Nuestro comienzo 💫' },
+                    { file: '22e5a860-9ebf-4cb9-9d63-a57f30174b1e.mp4', caption: 'Sonrisas que enamoran 😍' },
+                    { file: '4451e579-cc6e-44a9-a489-8577de949d47.jpg', caption: 'Momentos perfectos 💕' },
+                    { file: '722D7AF7-F130-49CC-A4DC-A29ADD685AF8.jpg', caption: 'Amor verdadero ❤️' },
+                    { file: '97e589d3-7169-4bd9-b210-c232388288e8.jpg', caption: 'Juntos para siempre 🌟' },
+                    { file: 'IMG_5679.JPG', caption: 'Sonrisas compartidas 😊' },
+                    { file: 'IMG_5687.JPG', caption: 'Abrazos infinitos 🤗' },
+                    { file: 'IMG_5690.JPG', caption: 'Miradas que dicen todo 👀' },
+                    { file: 'IMG_5695.MOV', caption: 'Risas que nunca olvidaré 😄' },
+                    { file: 'IMG_5743.JPG', caption: 'Felicidad pura ✨' },
+                    { file: 'IMG_5958.JPG', caption: 'Momentos mágicos 🌙' },
+                    { file: 'IMG_6242.PNG', caption: 'Tú, mi alegría 🎉' },
+                    { file: 'IMG_6253.JPG', caption: 'Cada día contigo es especial 🌹' },
+                    { file: 'IMG_6266.JPG', caption: 'Juntos en todo lugar 🌎' },
+                    { file: 'IMG_6318.JPG', caption: 'Mi lugar favorito 🏠' },
+                    { file: 'IMG_6372.JPG', caption: 'Amor en cada detalle 💝' },
+                    { file: 'IMG_6397.MOV', caption: 'Sueños cumplidos 🌈' },
+                    { file: 'IMG_6410.JPG', caption: 'La suerte de tenerte 🍀' },
+                    { file: 'IMG_6514.JPG', caption: 'Momentos que atesoro 💎' },
+                    { file: 'IMG_6544.JPG', caption: 'Juntos somos más 💪' },
+                    { file: 'IMG_6773.JPG', caption: 'Amor sin fin ∞' },
+                    { file: 'IMG_6776.JPG', caption: 'Para siempre tú y yo 💑' },
+                    { file: 'IMG_6786.MOV', caption: 'Sonrisas que iluminan 💡' },
+                    { file: 'IMG_6822.JPG', caption: 'Risas infinitas 😂' },
+                    { file: 'IMG_6857.JPG', caption: 'Abrazos que sanan 🤗' },
+                    { file: 'IMG_6859.JPG', caption: 'Momentos únicos 🎯' },
+                    { file: 'IMG_6998.JPG', caption: 'Juntos contra el mundo 🌍' },
+                    { file: 'IMG_7054.JPEG', caption: 'Mi mejor aventura 🚀' },
+                    { file: 'IMG_7056.MOV', caption: 'Felicidad compartida 🎊' },
+                    { file: 'IMG_7074.JPG', caption: 'Amor en cada detalle 🌸' },
+                    { file: 'IMG_7243.JPG', caption: 'Sonrisas contagiosas 😁' },
+                    { file: 'IMG_7258.JPG', caption: 'Momentos de oro 🏆' },
+                    { file: 'IMG_7291.JPG', caption: 'Juntos es mejor 🤝' },
+                    { file: 'IMG_7292.JPG', caption: 'Amor eterno 💖' },
+                    { file: 'IMG_7294.MOV', caption: 'Risas sinceras 😆' },
+                    { file: 'IMG_7297.JPG', caption: 'Abrazos cálidos 🔥' },
+                    { file: 'IMG_7388.JPG', caption: 'Momentos especiales ⭐' },
+                    { file: 'IMG_7430.JPEG', caption: 'Juntos siempre 🔄' },
+                    { file: 'IMG_7440.JPG', caption: 'Felicidad total 😍' },
+                    { file: 'IMG_7442.JPG', caption: 'Sonrisas radiantes ☀️' },
+                    { file: 'IMG_7456.JPG', caption: 'Amor verdadero 💯' },
+                    { file: 'IMG_7468.JPG', caption: 'Momentos inolvidables 📸' },
+                    { file: 'IMG_7483.JPG', caption: 'Juntos y felices 🎉' },
+                    { file: 'IMG_7493.JPG', caption: 'Risas que enamoran 😘' },
+                    { file: 'IMG_7506.JPG', caption: 'Abrazos eternos ♾️' },
+                    { file: 'IMG_7506.MOV', caption: 'Momentos perfectos 💫' },
+                    { file: 'IMG_7528.JPG', caption: 'Juntos para siempre 🌹' },
+                    { file: 'IMG_7530.JPG', caption: 'Sonrisas brillantes ✨' },
+                    { file: 'IMG_7533.MOV', caption: 'Amor infinito ❤️' },
+                    { file: 'IMG_7770.JPG', caption: 'Momentos de amor 💕' },
+                    { file: 'IMG_7816.JPG', caption: 'Juntos en el amor 💑' },
+                    { file: 'IMG_7852.JPG', caption: 'Risas y abrazos 🤗' },
+                    { file: 'IMG_7854.JPG', caption: 'Momentos únicos 🎀' },
+                    { file: 'IMG_8236.MOV', caption: 'Juntos es perfecto 🌟' },
+                    { file: 'IMG_8301.JPG', caption: 'Amor sin límites 🚀' },
+                    { file: 'IMG_8302.JPG', caption: 'Sonrisas eternas 😊' },
+                    { file: 'IMG_8343.JPG', caption: 'Para siempre 💝' },
+                    { file: 'IMG_8396.MOV', caption: 'Amor infinito ∞💕' }
+                ]
+            },
+            {
+                key: 'Segundo Mes',
+                title: 'Segundo Mes',
+                description: 'Nuevos días, nuevas risas y más razones para seguir eligiéndonos.',
+                photos: [
+                    { file: 'IMG_9100.JPG', caption: 'Nuestro segundo mes ✨', featured: true },
+                    { file: '12071096-43ff-4a93-aab9-f9572d226435.jpg', caption: 'Otro recuerdo bonito 💕' },
+                    { file: '16EFA257-F831-4BA9-AE94-441DCC28E234.jpg', caption: 'Cada día contigo 🌹' },
+                    { file: '2f6064ba-2aa6-4a93-b00f-507f0ce43f68.jpg', caption: 'Momentos que suman 💫' },
+                    { file: '3612F518-AF67-45CD-B983-0049D42669CA.jpg', caption: 'Tu sonrisa favorita 😊' },
+                    { file: '54062c54-4ec6-4f67-979f-4950366ed508.jpg', caption: 'Juntos otra vez ❤️' },
+                    { file: '7094A93F-5A26-4D8C-9E18-D2B5AEB27CBF.jpg', caption: 'Amor en detalles 🌸' },
+                    { file: '74acd599-c9e0-409d-ab17-807730d839e5.jpg', caption: 'Risas guardadas 😄' },
+                    { file: '75409D15-FC99-44E5-BB6D-A3531CC9D438.jpg', caption: 'Un instante perfecto 📸' },
+                    { file: '8eab3711-663e-4c6f-aa9c-139ebe91b3d2.jpg', caption: 'Lo nuestro crece 🌟' },
+                    { file: 'c0e61f63-49f0-4f62-b1d2-6fe69c561477.jpg', caption: 'Otro pedacito de historia 💌' },
+                    { file: 'c31681d9-7eda-4e67-b46a-2f629258c4ed.jpg', caption: 'Más cerca de ti 🤍' },
+                    { file: 'D5340C73-F9B0-4BE9-BE6A-52D7A80B8D78.jpg', caption: 'Siempre tú 💖' },
+                    { file: 'DFF5F7F4-24FC-43CC-8998-DA24B553C73F.jpg', caption: 'Nuestro brillo ✨' },
+                    { file: 'IMG_8838.JPG', caption: 'Días especiales ☀️' },
+                    { file: 'IMG_8848.JPG', caption: 'Contigo es mejor 🌷' },
+                    { file: 'IMG_8850.JPG', caption: 'Un recuerdo más 💎' },
+                    { file: 'IMG_8919.JPG', caption: 'Dos meses de amor 💞' },
+                    { file: 'IMG_8922.JPG', caption: 'Miradas bonitas 👀' },
+                    { file: 'IMG_8926.JPG', caption: 'Risas de los dos 😍' },
+                    { file: 'IMG_8933.JPG', caption: 'Lo mejor de mi día 💕' },
+                    { file: 'IMG_8934.JPG', caption: 'Momentos nuestros 🎀' },
+                    { file: 'IMG_8954.JPG', caption: 'Mi persona favorita 🌙' },
+                    { file: 'IMG_8997.JPG', caption: 'Seguimos sumando ✨' },
+                    { file: 'IMG_9010.JPG', caption: 'Amor bonito ❤️' },
+                    { file: 'IMG_9012.JPG', caption: 'Juntos en todo 🤝' },
+                    { file: 'IMG_9013.JPG', caption: 'Nuestro camino 🌈' },
+                    { file: 'IMG_9030.JPG', caption: 'Detalles que enamoran 💝' },
+                    { file: 'IMG_9052.JPG', caption: 'Otro día contigo 🌹' },
+                    { file: 'IMG_9058.JPG', caption: 'Felices los dos 😊' },
+                    { file: 'IMG_9099.JPG', caption: 'Casi dos meses 💫' },
+                    { file: 'IMG_9101.MOV', caption: 'Un video para recordar 🎬' }
+                ]
+            }
+        ];
+
+        const isVideoFile = (file) => /\.(mov|mp4)$/i.test(file);
+        const optimizedSrc = (month, file) => `assets/optimized/${month}/${file.replace(/\./g, '-').replace(/-([^-]+)$/, '-$1.webp')}`;
+        const originalSrc = (month, file) => `Fotos/${month}/${file}`;
+
         function createHearts() {
             const container = document.getElementById('hearts');
             for (let i = 0; i < 20; i++) {
@@ -602,38 +780,57 @@
             }
         }
 
-        // Optimize video loading with Intersection Observer
+        function setupRecapCarousel() {
+            const carousel = document.getElementById('recapCarousel');
+            const recapPhotos = [
+                monthCollections[0].photos[0],
+                monthCollections[0].photos[5],
+                monthCollections[0].photos[30],
+                monthCollections[1].photos[0],
+                monthCollections[1].photos[8],
+                monthCollections[1].photos[23]
+            ].map((photo, index) => ({
+                ...photo,
+                month: index < 3 ? monthCollections[0].key : monthCollections[1].key
+            })).filter(photo => !isVideoFile(photo.file));
+
+            carousel.innerHTML = recapPhotos.map((photo, index) => `
+                <div class="recap-slide ${index === 0 ? 'active' : ''}">
+                    <img src="${optimizedSrc(photo.month, photo.file)}" alt="${photo.caption}" decoding="async" loading="${index === 0 ? 'eager' : 'lazy'}">
+                    <div class="recap-caption">${photo.caption}</div>
+                </div>
+            `).join('');
+
+            let activeSlide = 0;
+            setInterval(() => {
+                const slides = carousel.querySelectorAll('.recap-slide');
+                slides[activeSlide].classList.remove('active');
+                activeSlide = (activeSlide + 1) % slides.length;
+                slides[activeSlide].classList.add('active');
+            }, 3600);
+        }
+
         function setupVideoObserver() {
-            // Check for slow connection or data saver mode
             const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
             const isSlowConnection = connection && (connection.saveData || (connection.effectiveType && connection.effectiveType.includes('2g')));
 
-            const videoOptions = {
-                root: null,
-                rootMargin: '100px',
-                threshold: 0.1
-            };
-
             const videoObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const video = entry.target.querySelector('video');
-                        const container = entry.target.querySelector('.video-container');
+                    if (!entry.isIntersecting) return;
 
-                        if (isSlowConnection && container) {
-                            container.classList.add('low-bandwidth');
-                        } else if (video && video.readyState === 0) {
-                            video.dataset.nearViewport = 'true';
-                        }
+                    const video = entry.target.querySelector('video');
+                    const container = entry.target.querySelector('.video-container');
+
+                    if (isSlowConnection && container) {
+                        container.classList.add('low-bandwidth');
+                    } else if (video && video.readyState === 0) {
+                        video.dataset.nearViewport = 'true';
                     }
                 });
-            }, videoOptions);
+            }, { root: null, rootMargin: '100px', threshold: 0.1 });
 
-            // Observe all video cards
             document.querySelectorAll('.photo-card').forEach(card => {
-                if (card.querySelector('video')) {
-                    videoObserver.observe(card);
-                }
+                if (card.querySelector('video')) videoObserver.observe(card);
             });
         }
 
@@ -655,222 +852,155 @@
             document.getElementById('seconds').textContent = seconds;
         }
 
-        // Load photos dynamically
-        async function loadPhotos() {
-            const gallery = document.getElementById('gallery');
-            const photoDir = 'iCloud Photos (1)/iCloud Photos/';
-            const optimizedDir = 'assets/optimized/';
-            const optimizedSrc = (file) => `${optimizedDir}${file.replace(/\.[^.]+$/, '.webp')}`;
-            const originalSrc = (file) => `${photoDir}${file}`;
-            const setOnlyActive = (selectedCard) => {
-                document.querySelectorAll('.photo-card').forEach(c => {
-                    if (c !== selectedCard) c.classList.remove('active');
-                });
-                selectedCard.classList.toggle('active');
-            };
-            const loadVideoSource = (video, file) => {
-                if (!video.src) {
-                    video.src = originalSrc(file);
-                    video.load();
-                }
-            };
+        function setOnlyActive(selectedCard) {
+            document.querySelectorAll('.photo-card').forEach(card => {
+                if (card !== selectedCard) card.classList.remove('active');
+            });
+            selectedCard.classList.toggle('active');
+        }
 
-            // Photos with Especial.JPG first and featured
-            const photos = [
-                { file: 'Especial.JPG', caption: 'Nuestro momento especial 🎀✨', featured: true },
-                { file: '1703eb87-a44a-45da-8c39-062432164d91.jpg', caption: 'Nuestro comienzo 💫' },
-                { file: '22e5a860-9ebf-4cb9-9d63-a57f30174b1e.mp4', caption: 'Sonrisas que enamoran 😍' },
-                { file: '4451e579-cc6e-44a9-a489-8577de949d47.jpg', caption: 'Momentos perfectos 💕' },
-                { file: '722D7AF7-F130-49CC-A4DC-A29ADD685AF8.jpg', caption: 'Amor verdadero ❤️' },
-                { file: '97e589d3-7169-4bd9-b210-c232388288e8.jpg', caption: 'Juntos para siempre 🌟' },
-                { file: 'IMG_5679.JPG', caption: 'Sonrisas compartidas 😊' },
-                { file: 'IMG_5687.JPG', caption: 'Abrazos infinitos 🤗' },
-                { file: 'IMG_5690.JPG', caption: 'Miradas que dicen todo 👀' },
-                { file: 'IMG_5695.MOV', caption: 'Risas que nunca olvidaré 😄' },
-                { file: 'IMG_5743.JPG', caption: 'Felicidad pura ✨' },
-                { file: 'IMG_5958.JPG', caption: 'Momentos mágicos 🌙' },
-                { file: 'IMG_6242.PNG', caption: 'Tú, mi alegría 🎉' },
-                { file: 'IMG_6253.JPG', caption: 'Cada día contigo es especial 🌹' },
-                { file: 'IMG_6266.JPG', caption: 'Juntos en todo lugar 🌎' },
-                { file: 'IMG_6318.JPG', caption: 'Mi lugar favorito 🏠' },
-                { file: 'IMG_6372.JPG', caption: 'Amor en cada detalle 💝' },
-                { file: 'IMG_6397.MOV', caption: 'Sueños cumplidos 🌈' },
-                { file: 'IMG_6410.JPG', caption: 'La suerte de tenerte 🍀' },
-                { file: 'IMG_6514.JPG', caption: 'Momentos que atesoro 💎' },
-                { file: 'IMG_6544.JPG', caption: 'Juntos somos más 💪' },
-                { file: 'IMG_6773.JPG', caption: 'Amor sin fin ∞' },
-                { file: 'IMG_6776.JPG', caption: 'Para siempre tú y yo 💑' },
-                { file: 'IMG_6786.MOV', caption: 'Sonrisas que iluminan 💡' },
-                { file: 'IMG_6822.JPG', caption: 'Risas infinitas 😂' },
-                { file: 'IMG_6857.JPG', caption: 'Abrazos que sanan 🤗' },
-                { file: 'IMG_6859.JPG', caption: 'Momentos únicos 🎯' },
-                { file: 'IMG_6998.JPG', caption: 'Juntos contra el mundo 🌍' },
-                { file: 'IMG_7054.JPEG', caption: 'Mi mejor aventura 🚀' },
-                { file: 'IMG_7056.MOV', caption: 'Felicidad compartida 🎊' },
-                { file: 'IMG_7074.JPG', caption: 'Amor en cada detalle 🌸' },
-                { file: 'IMG_7243.JPG', caption: 'Sonrisas contagiosas 😁' },
-                { file: 'IMG_7258.JPG', caption: 'Momentos de oro 🏆' },
-                { file: 'IMG_7291.JPG', caption: 'Juntos es mejor 🤝' },
-                { file: 'IMG_7292.JPG', caption: 'Amor eterno 💖' },
-                { file: 'IMG_7294.MOV', caption: 'Risas sinceras 😆' },
-                { file: 'IMG_7297.JPG', caption: 'Abrazos cálidos 🔥' },
-                { file: 'IMG_7388.JPG', caption: 'Momentos especiales ⭐' },
-                { file: 'IMG_7430.JPEG', caption: 'Juntos siempre 🔄' },
-                { file: 'IMG_7440.JPG', caption: 'Felicidad total 😍' },
-                { file: 'IMG_7442.JPG', caption: 'Sonrisas radiantes ☀️' },
-                { file: 'IMG_7456.JPG', caption: 'Amor verdadero 💯' },
-                { file: 'IMG_7468.JPG', caption: 'Momentos inolvidables 📸' },
-                { file: 'IMG_7483.JPG', caption: 'Juntos y felices 🎉' },
-                { file: 'IMG_7493.JPG', caption: 'Risas que enamoran 😘' },
-                { file: 'IMG_7506.JPG', caption: 'Abrazos eternos ♾️' },
-                { file: 'IMG_7506.MOV', caption: 'Momentos perfectos 💫' },
-                { file: 'IMG_7528.JPG', caption: 'Juntos para siempre 🌹' },
-                { file: 'IMG_7530.JPG', caption: 'Sonrisas brillantes ✨' },
-                { file: 'IMG_7533.MOV', caption: 'Amor infinito ❤️' },
-                { file: 'IMG_7770.JPG', caption: 'Momentos de amor 💕' },
-                { file: 'IMG_7816.JPG', caption: 'Juntos en el amor 💑' },
-                { file: 'IMG_7852.JPG', caption: 'Risas y abrazos 🤗' },
-                { file: 'IMG_7854.JPG', caption: 'Momentos únicos 🎀' },
-                { file: 'IMG_8236.MOV', caption: 'Juntos es perfecto 🌟' },
-                { file: 'IMG_8301.JPG', caption: 'Amor sin límites 🚀' },
-                { file: 'IMG_8302.JPG', caption: 'Sonrisas eternas 😊' },
-                { file: 'IMG_8343.JPG', caption: 'Para siempre 💝' },
-                { file: 'IMG_8396.MOV', caption: 'Amor infinito ∞💕' }
-            ];
+        function loadVideoSource(video) {
+            if (!video.src) {
+                video.src = video.dataset.src;
+                video.load();
+            }
+        }
 
-            photos.forEach((photoObj, index) => {
-                const card = document.createElement('div');
-                card.className = 'photo-card';
+        function createPhotoCard(photoObj, monthKey, index) {
+            const card = document.createElement('div');
+            card.className = 'photo-card';
 
-                // Make featured photo special
-                if (photoObj.featured) {
-                    card.classList.add('featured');
-                } else {
-                    card.style.setProperty('--rotation', (Math.random() * 6 - 3) + 'deg');
-                }
+            if (photoObj.featured) {
+                card.classList.add('featured');
+            } else {
+                card.style.setProperty('--rotation', (Math.random() * 6 - 3) + 'deg');
+            }
 
-                card.style.animationDelay = (index * 0.05) + 's';
-                card.setAttribute('tabindex', '0'); // Make focusable for keyboard and touch
+            card.style.animationDelay = (index * 0.035) + 's';
+            card.setAttribute('tabindex', '0');
 
-                const isVideo = photoObj.file.endsWith('.MOV') || photoObj.file.endsWith('.mp4');
-
-                if (isVideo) {
-                    card.innerHTML = `
-                        <div class="video-container">
-                            <video
-                                data-src="${originalSrc(photoObj.file)}"
-                                preload="none"
-                                muted
-                                loop
-                                playsinline
-                                poster="${optimizedSrc(photoObj.file)}"
-                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 2px;"
-                            ></video>
-                            <div class="video-preview-overlay">
-                                <div class="play-icon">▶</div>
-                            </div>
+            if (isVideoFile(photoObj.file)) {
+                card.innerHTML = `
+                    <div class="video-container">
+                        <video
+                            data-src="${originalSrc(monthKey, photoObj.file)}"
+                            preload="none"
+                            muted
+                            loop
+                            playsinline
+                            poster="${optimizedSrc(monthKey, photoObj.file)}"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 2px;"
+                        ></video>
+                        <div class="video-preview-overlay">
+                            <div class="play-icon">▶</div>
                         </div>
-                        <div class="caption">${photoObj.caption}</div>
-                    `;
+                    </div>
+                    <div class="caption">${photoObj.caption}</div>
+                `;
 
-                    // Enhanced video handling
-                    const video = card.querySelector('video');
-                    const previewOverlay = card.querySelector('.video-preview-overlay');
-                    // Play/Pause handling
-                    const togglePlay = () => {
-                        if (video.paused) {
-                            // Pause all other videos
-                            document.querySelectorAll('video').forEach(v => {
-                                if (v !== video && !v.paused) v.pause();
-                            });
+                const video = card.querySelector('video');
+                const previewOverlay = card.querySelector('.video-preview-overlay');
 
-                            loadVideoSource(video, photoObj.file);
-                            video.play().then(() => {
-                                previewOverlay.style.opacity = '0';
-                                previewOverlay.style.pointerEvents = 'none';
-                            }).catch(() => {
-                                previewOverlay.style.opacity = '1';
-                                previewOverlay.style.pointerEvents = 'auto';
-                            });
-                        } else {
-                            video.pause();
+                const togglePlay = () => {
+                    if (video.paused) {
+                        document.querySelectorAll('video').forEach(v => {
+                            if (v !== video && !v.paused) v.pause();
+                        });
+
+                        loadVideoSource(video);
+                        video.play().then(() => {
+                            previewOverlay.style.opacity = '0';
+                            previewOverlay.style.pointerEvents = 'none';
+                        }).catch(() => {
                             previewOverlay.style.opacity = '1';
                             previewOverlay.style.pointerEvents = 'auto';
-                        }
-                    };
-
-                    // Click to play
-                    card.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        togglePlay();
-                        setOnlyActive(card);
-                    });
-
-                    // Mouse hover for desktop
-                    card.addEventListener('mouseenter', function() {
-                        previewOverlay.style.opacity = '1';
-                    });
-
-                    card.addEventListener('mouseleave', function() {
-                        if (!video.paused) {
-                            previewOverlay.style.opacity = '0';
-                        }
-                    });
-
-                    // Show overlay when video ends
-                    video.addEventListener('ended', function() {
+                        });
+                    } else {
+                        video.pause();
                         previewOverlay.style.opacity = '1';
                         previewOverlay.style.pointerEvents = 'auto';
-                    });
-
-                    // Handle video errors
-                    video.addEventListener('error', function() {
-                        previewOverlay.innerHTML = '<div class="play-icon" style="background: rgba(255,0,0,0.7);">❌</div>';
-                    });
-
-                    card.addEventListener('mouseleave', function() {
-                        if (!card.classList.contains('active')) {
-                            video.pause();
-                        }
-                    });
-
-                } else {
-                    card.innerHTML = `
-                        <img
-                            src="${optimizedSrc(photoObj.file)}"
-                            data-original="${originalSrc(photoObj.file)}"
-                            alt="${photoObj.caption}"
-                            loading="${photoObj.featured ? 'eager' : 'lazy'}"
-                            decoding="async"
-                            fetchpriority="${photoObj.featured ? 'high' : 'auto'}"
-                            onerror="if (this.dataset.original && this.src !== this.dataset.original) { this.src = this.dataset.original; this.dataset.original = ''; } else { this.parentElement.style.display='none'; }"
-                        >
-                        <div class="caption">${photoObj.caption}</div>
-                    `;
-                }
-
-                // Add touch/click handling for non-video cards
-                if (!isVideo) {
-                    card.addEventListener('click', function() {
-                        setOnlyActive(this);
-                    });
-                }
-
-                // Handle keyboard events
-                card.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.click();
                     }
+                };
+
+                card.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    togglePlay();
+                    setOnlyActive(card);
                 });
 
-                gallery.appendChild(card);
+                card.addEventListener('mouseenter', () => {
+                    previewOverlay.style.opacity = '1';
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    if (!video.paused) previewOverlay.style.opacity = '0';
+                    if (!card.classList.contains('active')) video.pause();
+                });
+
+                video.addEventListener('ended', () => {
+                    previewOverlay.style.opacity = '1';
+                    previewOverlay.style.pointerEvents = 'auto';
+                });
+
+                video.addEventListener('error', () => {
+                    previewOverlay.innerHTML = '<div class="play-icon" style="background: rgba(255,0,0,0.7);">❌</div>';
+                });
+            } else {
+                card.innerHTML = `
+                    <img
+                        src="${optimizedSrc(monthKey, photoObj.file)}"
+                        data-original="${originalSrc(monthKey, photoObj.file)}"
+                        alt="${photoObj.caption}"
+                        loading="${photoObj.featured ? 'eager' : 'lazy'}"
+                        decoding="async"
+                        fetchpriority="${photoObj.featured ? 'high' : 'auto'}"
+                        onerror="if (this.dataset.original && this.src !== this.dataset.original) { this.src = this.dataset.original; this.dataset.original = ''; } else { this.parentElement.style.display='none'; }"
+                    >
+                    <div class="caption">${photoObj.caption}</div>
+                `;
+
+                card.addEventListener('click', () => setOnlyActive(card));
+            }
+
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+
+            return card;
+        }
+
+        function loadPhotos() {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+
+            monthCollections.forEach((month) => {
+                const section = document.createElement('section');
+                section.className = 'month-section';
+
+                section.innerHTML = `
+                    <div class="month-heading">
+                        <h3>${month.title}</h3>
+                        <p>${month.description}</p>
+                    </div>
+                    <div class="gallery-grid"></div>
+                `;
+
+                const grid = section.querySelector('.gallery-grid');
+                month.photos.forEach((photoObj, index) => {
+                    grid.appendChild(createPhotoCard(photoObj, month.key, index));
+                });
+
+                gallery.appendChild(section);
             });
         }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             createHearts();
+            setupRecapCarousel();
             loadPhotos();
             updateTimeCounter();
             setInterval(updateTimeCounter, 1000);

@@ -9,6 +9,7 @@ interface TimelineItem {
   month: string
   monthTitle: string
   monthFullTitle: string
+  monthDate?: string
   photo: {
     file: string
     caption: string
@@ -66,6 +67,7 @@ export default function History({ items }: HistoryProps) {
                 </div>
                 <div className={styles.timelineInfo}>
                   <div className={styles.timelineMonth}>{item.monthTitle}</div>
+                  {item.monthDate && <div className={styles.timelineDate}>{item.monthDate}</div>}
                   <div className={styles.timelineCaption}>{item.photo.caption}</div>
                 </div>
               </div>
@@ -96,6 +98,7 @@ export default function History({ items }: HistoryProps) {
               <div className={styles.cardContent}>
                 <div className={styles.cardMonth}>{item.monthTitle}</div>
                 <div className={styles.cardLabel}>Mes</div>
+                {item.monthDate && <div className={styles.cardDate}>{item.monthDate}</div>}
               </div>
             </Link>
           ))}

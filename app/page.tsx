@@ -44,6 +44,7 @@ export default function HomePage() {
       month: mes.slug,
       monthTitle: mes.title.split(' ')[0], // Solo "Primer", "Segundo", etc.
       monthFullTitle: mes.title,
+      monthDate: (mes as any).date,
       photo: featuredPhoto,
       index: mes.order
     }]

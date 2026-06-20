@@ -1,6 +1,6 @@
 {
   "startDate": "2026-03-21T23:00:00",
-  "heroTitle": "Dos Meses Juntos",
+  "heroTitle": "Tres Meses Juntos",
   "heroSubtitle": "Un recap de todo lo bonito que hemos vivido",
   "messages": [
     "En estos dos meses, me has enseñado que el amor verdadero no se mide en tiempo, sino en la cantidad de momentos que nos hacen sonreír.",
@@ -32,6 +32,16 @@
       "month": "segundo-mes",
       "file": "IMG_9058.JPG",
       "caption": "Para siempre, es lo que prometo cada día contigo 💝"
+    },
+    {
+      "month": "tercer-mes",
+      "file": "0.Carrusel.JPG",
+      "caption": "Tres meses y no me canso de amarte 🎉"
+    },
+    {
+      "month": "tercer-mes",
+      "file": "0.Carusel.PNG",
+      "caption": "Cada día a tu lado es un regalo 🎁"
     }
   ]
 }

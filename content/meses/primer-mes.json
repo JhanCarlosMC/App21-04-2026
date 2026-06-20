@@ -2,9 +2,13 @@
   "slug": "primer-mes",
   "title": "Primer Mes",
   "description": "El comienzo de esta historia, con las fotos tal como estaban en nuestro primer recuerdo.",
+  "date": "Marzo 2026",
   "order": 1,
   "photos": [
     { "file": "Especial.JPG", "caption": "Nuestro momento especial 🎀✨", "featured": true },
+    { "file": "0.FotoPrimerMes.jpeg", "caption": "Foto que atesoro 💎" },
+    { "file": "0.PasterPrimerMes.jpeg", "caption": "Nuestro poster especial 🖼️" },
+    { "file": "0.VideoPrimerMes.mp4", "caption": "Video inolvidable 🎬" },
     { "file": "1703eb87-a44a-45da-8c39-062432164d91.jpg", "caption": "Nuestro comienzo 💫" },
     { "file": "22e5a860-9ebf-4cb9-9d63-a57f30174b1e.mp4", "caption": "Sonrisas que enamoran 😍" },
     { "file": "97e589d3-7169-4bd9-b210-c232388288e8.jpg", "caption": "Juntos para siempre 🌟" },

@@ -6,6 +6,7 @@ import styles from './Timeline.module.css'
 interface TimelineItem {
   month: string
   monthTitle: string
+  monthDate?: string
   photo: {
     file: string
     caption: string
@@ -40,6 +41,7 @@ export default function Timeline({ items }: TimelineProps) {
               </div>
               <div className={styles.timelineInfo}>
                 <div className={styles.timelineMonth}>{item.monthTitle}</div>
+                {item.monthDate && <div className={styles.timelineDate}>{item.monthDate}</div>}
                 <div className={styles.timelineCaption}>{item.photo.caption}</div>
               </div>
             </div>

@@ -1,0 +1,70 @@
+{
+  "slug": "tercer-mes",
+  "title": "Tercer Mes",
+  "description": "Tres meses contigo y cada día me enamoro más de ti. Gracias por ser mi todo.",
+  "date": "Mayo 2026",
+  "order": 3,
+  "photos": [
+    {
+      "file": "0.Featured.JPG",
+      "caption": "Nuestro tercer mes juntos 💕",
+      "featured": true
+    },
+    {
+      "file": "0.important.JPG",
+      "caption": "Momento especial que atesoro 💎"
+    },
+    {
+      "file": "0.Carusel.PNG",
+      "caption": "Otro recuerdo hermoso de ti 🌸"
+    },
+    {
+      "file": "IMG_9261.JPG",
+      "caption": "Sonrisas que ilumitan mi día ☀️"
+    },
+    {
+      "file": "IMG_9454.JPG",
+      "caption": "Juntos es todo mejor 🌟"
+    },
+    {
+      "file": "IMG_9479.JPG",
+      "caption": "Tu mirada me hipnotiza 👀"
+    },
+    {
+      "file": "IMG_9483.JPG",
+      "caption": "Abrazos que curan todo 🤗"
+    },
+    {
+      "file": "IMG_9547.JPG",
+      "caption": "Felicidad en su máxima expresión ✨"
+    },
+    {
+      "file": "IMG_9575.JPG",
+      "caption": "Cada instante contigo vale oro 🏆"
+    },
+    {
+      "file": "faef3818-0488-4c61-a3ae-9e97622ed136.jpg",
+      "caption": "Recuerdo hermoso de ti 💝"
+    },
+    {
+      "file": "4dd368d4-cb23-4bbc-89df-19cc2addaa64.mov",
+      "caption": "Sonrisas que guardo en mi corazón 💓"
+    },
+    {
+      "file": "IMG_9450.MOV",
+      "caption": "Videos que se quedan grabados en mi alma 🎬"
+    },
+    {
+      "file": "IMG_9539.MOV",
+      "caption": "Risas que nunca olvidaré 😄"
+    },
+    {
+      "file": "IMG_9578.MOV",
+      "caption": "Momentos mágicos juntos 🌈"
+    },
+    {
+      "file": "IMG_9586.MOV",
+      "caption": "Para siempre, mi amor 💑"
+    }
+  ]
+}

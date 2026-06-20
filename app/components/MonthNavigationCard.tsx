@@ -14,6 +14,7 @@ interface Month {
   slug: string
   title: string
   description: string
+  date?: string
   order: number
   photos: Photo[]
 }
@@ -70,6 +71,7 @@ export default function MonthNavigationCard({ month }: MonthNavigationCardProps)
         <div className={styles.content}>
           <div className={styles.monthNumber}>{ordinalOnly}</div>
           <div className={styles.monthLabel}>Mes</div>
+          {month.date && <div className={styles.monthDate}>{month.date}</div>}
         </div>
       </div>
     </Link>

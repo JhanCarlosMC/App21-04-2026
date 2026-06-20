@@ -2,12 +2,37 @@
   "slug": "segundo-mes",
   "title": "Segundo Mes",
   "description": "Nuevos días, nuevas risas y más razones para seguir eligiéndonos.",
+  "date": "Abril 2026",
   "order": 2,
   "photos": [
     {
       "file": "IMG_8933.JPG",
       "caption": "Nuestro segundo mes ✨",
       "featured": true
+    },
+    {
+      "file": "0.MiAmorSegundoMes.jpeg",
+      "caption": "Mi amor eterno 💕"
+    },
+    {
+      "file": "0.MiAmorSegundoMess.jpeg",
+      "caption": "Te quiero más cada día 💖"
+    },
+    {
+      "file": "0.RegaloSegundoMes.jpeg",
+      "caption": "Nuestro regalo especial 🎁"
+    },
+    {
+      "file": "40E934E8-86C7-4600-AC65-3F39F055DA83_1_102_a.mov",
+      "caption": "Sonrisas que guardo 😊"
+    },
+    {
+      "file": "4B3AD92E-DCB1-4426-9F93-C5D04991C474_1_105_c.jpeg",
+      "caption": "Momento perfecto ⭐"
+    },
+    {
+      "file": "5C0753F3-6BFA-4372-9F6D-41885CD92A66_1_105_c.jpeg",
+      "caption": "Recuerdo hermoso 🌸"
     },
     {
       "file": "IMG_9100.JPG",

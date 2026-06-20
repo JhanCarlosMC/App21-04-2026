@@ -1,0 +1,341 @@
+.historySection {
+  padding: 60px 20px;
+  text-align: center;
+  margin: 40px 0;
+}
+
+.historyTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--color-terracotta);
+  margin-bottom: 40px;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+}
+
+.viewToggle {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 50px;
+}
+
+.toggleBtn {
+  padding: 12px 30px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #6B4444;
+  background: white;
+  border: 2px solid rgba(199, 86, 72, 0.3);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggleBtn:hover {
+  border-color: #E85A4F;
+  color: #E85A4F;
+  transform: translateY(-2px);
+}
+
+.toggleBtn.active {
+  background: #E85A4F;
+  color: white;
+  border-color: #E85A4F;
+}
+
+/* Timeline Styles */
+.timelineContainer {
+  position: relative;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 50px 30px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(199, 86, 72, 0.4) transparent;
+}
+
+.timelineContainer::-webkit-scrollbar {
+  height: 8px;
+}
+
+.timelineContainer::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+.timelineContainer::-webkit-scrollbar-thumb {
+  background: rgba(199, 86, 72, 0.6);
+  border-radius: 4px;
+}
+
+.timelineContainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(199, 86, 72, 0.8);
+}
+
+.timelineLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(199, 86, 72, 0.4) 10%,
+    rgba(199, 86, 72, 0.6) 50%,
+    rgba(199, 86, 72, 0.4) 90%,
+    transparent
+  );
+  z-index: 1;
+}
+
+.timelineItem {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  width: 200px;
+  text-decoration: none;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  transition: transform 0.3s ease;
+}
+
+.timelineItem:hover {
+  transform: scale(1.05);
+}
+
+.timelineDot {
+  width: 20px;
+  height: 20px;
+  background: #E85A4F;
+  border: 4px solid white;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  box-shadow: 0 3px 10px rgba(199, 86, 72, 0.5);
+  position: relative;
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.timelineItem:hover .timelineDot {
+  transform: scale(1.5);
+  box-shadow: 0 5px 15px rgba(199, 86, 72, 0.7);
+}
+
+.timelineContent {
+  text-align: center;
+}
+
+.timelineImage {
+  margin-bottom: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(199, 86, 72, 0.25);
+  transition: all 0.3s ease;
+  background: white;
+  padding: 5px;
+}
+
+.timelineItem:hover .timelineImage {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(199, 86, 72, 0.35);
+}
+
+.timelineThumbnail {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+.timelineInfo {
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+.timelineMonth {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #E85A4F;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.timelineCaption {
+  font-size: 0.8rem;
+  color: #6B4444;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.timelineLineEnd {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 30px;
+  height: 3px;
+  background: linear-gradient(to left, rgba(199, 86, 72, 0.4), transparent);
+  z-index: 1;
+}
+
+/* Cards Styles */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.historyCard {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(199, 86, 72, 0.15);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-decoration: none;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.historyCard:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(199, 86, 72, 0.25);
+}
+
+.cardImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.historyCard:hover .cardImage {
+  transform: scale(1.1);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.2) 40%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.cardContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  text-align: center;
+  z-index: 1;
+}
+
+.cardMonth {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  line-height: 1;
+}
+
+.cardLabel {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 8px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .historySection {
+    padding: 40px 15px;
+  }
+
+  .historyTitle {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .viewToggle {
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  .toggleBtn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .timelineContainer {
+    padding: 40px 20px;
+  }
+
+  .timelineItem {
+    width: 160px;
+  }
+
+  .timelineInfo {
+    max-width: 140px;
+  }
+
+  .timelineMonth {
+    font-size: 0.85rem;
+  }
+
+  .timelineCaption {
+    font-size: 0.75rem;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 0 15px;
+  }
+
+  .cardMonth {
+    font-size: 1.8rem;
+  }
+
+  .cardLabel {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+  }
+}

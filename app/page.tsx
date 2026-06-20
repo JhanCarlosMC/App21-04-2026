@@ -1,7 +1,7 @@
 import { getConfig, getAllMonths } from '@/lib/content'
 import TimeCounter from './components/TimeCounter'
 import ScrollingCarousel from './components/ScrollingCarousel'
-import MonthNavigationCard from './components/MonthNavigationCard'
+import History from './components/History'
 
 function numberToText(num: number): string {
   const units = ['', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve']
@@ -36,6 +36,19 @@ export default function HomePage() {
   const monthsText = numberToText(monthsCount)
   const dynamicTitle = `${monthsText} Meses Juntos`
 
+  // Crear items para History - una foto destacada de cada mes
+  const historyItems = meses.flatMap((mes) => {
+    const featuredPhoto = mes.photos.find(p => p.featured) || mes.photos[0]
+    if (!featuredPhoto) return []
+    return [{
+      month: mes.slug,
+      monthTitle: mes.title.split(' ')[0], // Solo "Primer", "Segundo", etc.
+      monthFullTitle: mes.title,
+      photo: featuredPhoto,
+      index: mes.order
+    }]
+  })
+
   return (
     <div className="container">
       <section className="hero">
@@ -49,25 +62,7 @@ export default function HomePage() {
         <ScrollingCarousel photos={config.recapPhotos} />
       </section>
 
-      <section className="messages">
-        {config.messages.map((message, index) => (
-          <div key={index} className="message-card">
-            <p>{message}</p>
-          </div>
-        ))}
-      </section>
-
-      <section className="months-navigation">
-        <h2 className="section-title">Nuestros Meses Juntos</h2>
-        <div className="months-grid">
-          {meses.map((mes) => (
-            <MonthNavigationCard
-              key={mes.slug}
-              month={mes}
-            />
-          ))}
-        </div>
-      </section>
+      <History items={historyItems} />
 
       <footer>
         <p>Para ti, con todo mi amor</p>

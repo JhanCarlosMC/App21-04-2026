@@ -18,7 +18,7 @@ const sourceSans = Source_Sans_3({
 })
 
 export const metadata: Metadata = {
-  title: 'Dos Meses Juntos - Nuestro Álbum',
+  title: 'Nuestros Meses Juntos - Nuestro Álbum',
   description: 'Un recap de todo lo bonito que hemos vivido juntos'
 }
 

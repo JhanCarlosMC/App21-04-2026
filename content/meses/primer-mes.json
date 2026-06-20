@@ -1,0 +1,245 @@
+{
+  "slug": "primer-mes",
+  "title": "Primer Mes",
+  "description": "El comienzo de esta historia, con las fotos tal como estaban en nuestro primer recuerdo.",
+  "order": 1,
+  "photos": [
+    {
+      "file": "Especial.JPG",
+      "caption": "Nuestro momento especial 🎀✨",
+      "featured": true
+    },
+    {
+      "file": "1703eb87-a44a-45da-8c39-062432164d91.jpg",
+      "caption": "Nuestro comienzo 💫"
+    },
+    {
+      "file": "22e5a860-9ebf-4cb9-9d63-a57f30174b1e.mp4",
+      "caption": "Sonrisas que enamoran 😍"
+    },
+    {
+      "file": "4451e579-cc6e-44a9-a489-8577de949d47.jpg",
+      "caption": "Momentos perfectos 💕"
+    },
+    {
+      "file": "722D7AF7-F130-49CC-A4DC-A29ADD685AF8.jpg",
+      "caption": "Amor verdadero ❤️"
+    },
+    {
+      "file": "97e589d3-7169-4bd9-b210-c232388288e8.jpg",
+      "caption": "Juntos para siempre 🌟"
+    },
+    {
+      "file": "IMG_5679.JPG",
+      "caption": "Sonrisas compartidas 😊"
+    },
+    {
+      "file": "IMG_5687.JPG",
+      "caption": "Abrazos infinitos 🤗"
+    },
+    {
+      "file": "IMG_5690.JPG",
+      "caption": "Miradas que dicen todo 👀"
+    },
+    {
+      "file": "IMG_5695.MOV",
+      "caption": "Risas que nunca olvidaré 😄"
+    },
+    {
+      "file": "IMG_5743.JPG",
+      "caption": "Felicidad pura ✨"
+    },
+    {
+      "file": "IMG_5958.JPG",
+      "caption": "Momentos mágicos 🌙"
+    },
+    {
+      "file": "IMG_6242.PNG",
+      "caption": "Tú, mi alegría 🎉"
+    },
+    {
+      "file": "IMG_6253.JPG",
+      "caption": "Cada día contigo es especial 🌹"
+    },
+    {
+      "file": "IMG_6266.JPG",
+      "caption": "Juntos en todo lugar 🌎"
+    },
+    {
+      "file": "IMG_6318.JPG",
+      "caption": "Mi lugar favorito 🏠"
+    },
+    {
+      "file": "IMG_6372.JPG",
+      "caption": "Amor en cada detalle 💝"
+    },
+    {
+      "file": "IMG_6397.MOV",
+      "caption": "Sueños cumplidos 🌈"
+    },
+    {
+      "file": "IMG_6410.JPG",
+      "caption": "La suerte de tenerte 🍀"
+    },
+    {
+      "file": "IMG_6514.JPG",
+      "caption": "Momentos que atesoro 💎"
+    },
+    {
+      "file": "IMG_6544.JPG",
+      "caption": "Juntos somos más 💪"
+    },
+    {
+      "file": "IMG_6773.JPG",
+      "caption": "Amor sin fin ∞"
+    },
+    {
+      "file": "IMG_6776.JPG",
+      "caption": "Para siempre tú y yo 💑"
+    },
+    {
+      "file": "IMG_6786.MOV",
+      "caption": "Sonrisas que iluminan 💡"
+    },
+    {
+      "file": "IMG_6822.JPG",
+      "caption": "Risas infinitas 😂"
+    },
+    {
+      "file": "IMG_6857.JPG",
+      "caption": "Abrazos que sanan 🤗"
+    },
+    {
+      "file": "IMG_6859.JPG",
+      "caption": "Momentos únicos 🎯"
+    },
+    {
+      "file": "IMG_6998.JPG",
+      "caption": "Juntos contra el mundo 🌍"
+    },
+    {
+      "file": "IMG_7054.JPEG",
+      "caption": "Mi mejor aventura 🚀"
+    },
+    {
+      "file": "IMG_7056.MOV",
+      "caption": "Felicidad compartida 🎊"
+    },
+    {
+      "file": "IMG_7074.JPG",
+      "caption": "Amor en cada detalle 🌸"
+    },
+    {
+      "file": "IMG_7243.JPG",
+      "caption": "Sonrisas contagiosas 😁"
+    },
+    {
+      "file": "IMG_7258.JPG",
+      "caption": "Momentos de oro 🏆"
+    },
+    {
+      "file": "IMG_7291.JPG",
+      "caption": "Juntos es mejor 🤝"
+    },
+    {
+      "file": "IMG_7292.JPG",
+      "caption": "Amor eterno 💖"
+    },
+    {
+      "file": "IMG_7294.MOV",
+      "caption": "Risas sinceras 😆"
+    },
+    {
+      "file": "IMG_7297.JPG",
+      "caption": "Abrazos cálidos 🔥"
+    },
+    {
+      "file": "IMG_7388.JPG",
+      "caption": "Momentos especiales ⭐"
+    },
+    {
+      "file": "IMG_7430.JPEG",
+      "caption": "Juntos siempre 🔄"
+    },
+    {
+      "file": "IMG_7440.JPG",
+      "caption": "Felicidad total 😍"
+    },
+    {
+      "file": "IMG_7442.JPG",
+      "caption": "Sonrisas radiantes ☀️"
+    },
+    {
+      "file": "IMG_7456.JPG",
+      "caption": "Amor verdadero 💯"
+    },
+    {
+      "file": "IMG_7468.JPG",
+      "caption": "Momentos inolvidables 📸"
+    },
+    {
+      "file": "IMG_7483.JPG",
+      "caption": "Juntos y felices 🎉"
+    },
+    {
+      "file": "IMG_7493.JPG",
+      "caption": "Risas que enamoran 😘"
+    },
+    {
+      "file": "IMG_7506.JPG",
+      "caption": "Abrazos eternos ♾️"
+    },
+    {
+      "file": "IMG_7506.MOV",
+      "caption": "Momentos perfectos 💫"
+    },
+    {
+      "file": "IMG_7528.JPG",
+      "caption": "Juntos para siempre 🌹"
+    },
+    {
+      "file": "IMG_7530.JPG",
+      "caption": "Sonrisas brillantes ✨"
+    },
+    {
+      "file": "IMG_7533.MOV",
+      "caption": "Amor infinito ❤️"
+    },
+    {
+      "file": "IMG_7770.JPG",
+      "caption": "Momentos de amor 💕"
+    },
+    {
+      "file": "IMG_7816.JPG",
+      "caption": "Juntos en el amor 💑"
+    },
+    {
+      "file": "IMG_7852.JPG",
+      "caption": "Risas y abrazos 🤗"
+    },
+    {
+      "file": "IMG_7854.JPG",
+      "caption": "Momentos únicos 🎀"
+    },
+    {
+      "file": "IMG_8236.MOV",
+      "caption": "Juntos es perfecto 🌟"
+    },
+    {
+      "file": "IMG_8301.JPG",
+      "caption": "Amor sin límites 🚀"
+    },
+    {
+      "file": "IMG_8302.JPG",
+      "caption": "Sonrisas eternas 😊"
+    },
+    {
+      "file": "IMG_8343.JPG",
+      "caption": "Para siempre 💝"
+    },
+    {
+      "file": "IMG_8396.MOV",
+      "caption": "Amor infinito ∞💕"
+    }
+  ]
+}

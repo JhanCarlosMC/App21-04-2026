@@ -1,0 +1,42 @@
+{
+  "startDate": "2026-03-21T23:00:00",
+  "heroTitle": "Dos Meses Juntos",
+  "heroSubtitle": "Un recap de todo lo bonito que hemos vivido",
+  "messages": [
+    "En estos dos meses, me has enseñado que el amor verdadero no se mide en tiempo, sino en la cantidad de momentos que nos hacen sonreír.",
+    "Cada mes tiene sus propias historias, pero mi favorita sigue siendo la que estamos escribiendo juntos día a día.",
+    "Gracias por ser mi compañera, mi mejor amiga, y el motivo de mis sonrisas. Te amo más de lo que las palabras pueden expresar."
+  ],
+  "recapPhotos": [
+    {
+      "month": "primer-mes",
+      "file": "Especial.JPG",
+      "caption": "Nuestro momento especial 🎀✨"
+    },
+    {
+      "month": "primer-mes",
+      "file": "IMG_7074.JPG",
+      "caption": "Amor en cada detalle 🌸"
+    },
+    {
+      "month": "primer-mes",
+      "file": "IMG_7483.JPG",
+      "caption": "Juntos y felices 🎉"
+    },
+    {
+      "month": "segundo-mes",
+      "file": "IMG_9100.JPG",
+      "caption": "Nuestro segundo mes ✨"
+    },
+    {
+      "month": "segundo-mes",
+      "file": "IMG_9030.JPG",
+      "caption": "Detalles que enamoran 💝"
+    },
+    {
+      "month": "primer-mes",
+      "file": "IMG_8302.JPG",
+      "caption": "Sonrisas eternas 😊"
+    }
+  ]
+}

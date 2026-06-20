@@ -1,25 +1,52 @@
 import { getConfig, getAllMonths } from '@/lib/content'
 import TimeCounter from './components/TimeCounter'
-import RecapCarousel from './components/RecapCarousel'
-import PhotoCard from './components/PhotoCard'
-import VideoCard from './components/VideoCard'
+import ScrollingCarousel from './components/ScrollingCarousel'
+import MonthNavigationCard from './components/MonthNavigationCard'
+
+function numberToText(num: number): string {
+  const units = ['', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve']
+  const teens = ['Diez', 'Once', 'Doce', 'Trece', 'Catorce', 'Quince', 'Dieciséis', 'Diecisiete', 'Dieciocho', 'Diecinueve']
+  const tens = ['', '', 'Veinte', 'Treinta', 'Cuarenta', 'Cincuenta', 'Sesenta', 'Setenta', 'Ochenta', 'Noventa']
+
+  if (num === 0) return 'Cero'
+  if (num < 10) return units[num]
+  if (num < 20) return teens[num - 10]
+  if (num < 30) return num === 20 ? 'Veinte' : 'Veinti' + units[num % 10]
+  if (num < 100) {
+    const ten = Math.floor(num / 10)
+    const unit = num % 10
+    return unit > 0 ? tens[ten] + ' y ' + units[unit] : tens[ten]
+  }
+  if (num < 1000) {
+    const hundred = Math.floor(num / 100)
+    const remainder = num % 100
+    if (hundred === 1) {
+      return remainder > 0 ? 'Ciento ' + numberToText(remainder) : 'Cien'
+    }
+    const hundredText = units[hundred] + 'cientos'
+    return remainder > 0 ? hundredText + ' ' + numberToText(remainder) : hundredText
+  }
+  return num.toString()
+}
 
 export default function HomePage() {
   const config = getConfig()
   const meses = getAllMonths()
+  const monthsCount = meses.length
+  const monthsText = numberToText(monthsCount)
+  const dynamicTitle = `${monthsText} Meses Juntos`
 
   return (
     <div className="container">
       <section className="hero">
-        <h1>{config.heroTitle}</h1>
+        <h1>{dynamicTitle}</h1>
         <p className="subtitle">{config.heroSubtitle}</p>
-        <div className="heart">❤️</div>
       </section>
 
       <TimeCounter startDate={config.startDate} />
 
       <section className="recap-section">
-        <RecapCarousel photos={config.recapPhotos} />
+        <ScrollingCarousel photos={config.recapPhotos} />
       </section>
 
       <section className="messages">
@@ -30,36 +57,14 @@ export default function HomePage() {
         ))}
       </section>
 
-      <section className="gallery">
-        <h2 className="gallery-title">Nuestros Momentos Por Mes</h2>
-        <div className="gallery">
+      <section className="months-navigation">
+        <h2 className="section-title">Nuestros Meses Juntos</h2>
+        <div className="months-grid">
           {meses.map((mes) => (
-            <div key={mes.slug} className="month-section" id={mes.slug}>
-              <div className="month-heading">
-                <h3>{mes.title}</h3>
-                <p>{mes.description}</p>
-              </div>
-              <div className="gallery-grid">
-                {mes.photos.map((photo, index) => {
-                  const isVideo = /\.(mov|mp4)$/i.test(photo.file)
-                  return isVideo ? (
-                    <VideoCard
-                      key={photo.file}
-                      monthSlug={mes.slug}
-                      photo={photo}
-                      index={index}
-                    />
-                  ) : (
-                    <PhotoCard
-                      key={photo.file}
-                      monthSlug={mes.slug}
-                      photo={photo}
-                      index={index}
-                    />
-                  )
-                })}
-              </div>
-            </div>
+            <MonthNavigationCard
+              key={mes.slug}
+              month={mes}
+            />
           ))}
         </div>
       </section>

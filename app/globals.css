@@ -91,14 +91,14 @@ body::before {
 /* Hero Section */
 .hero {
     text-align: center;
-    padding: 80px 20px;
+    padding: 40px 20px;
     position: relative;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 700;
     background: linear-gradient(135deg, #C15648, #E85A4F, #D46A6A);
     -webkit-background-clip: text;
@@ -108,6 +108,7 @@ body::before {
     opacity: 0;
     animation: fadeInUp 1s ease forwards;
     text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+    line-height: 1.1;
 }
 
 .hero .subtitle {
@@ -140,7 +141,7 @@ body::before {
 }
 
 .recap-section {
-    margin: 30px 0 80px;
+    margin: 15px 0 30px;
 }
 
 .recap-slide {
@@ -193,45 +194,122 @@ body::before {
 /* Time Counter */
 .time-counter {
     text-align: center;
-    margin: 60px 0;
-    padding: 40px;
+    margin: 25px 0;
+    padding: 30px 20px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 20px;
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 40px rgba(199, 86, 72, 0.2);
 }
 
-.time-counter h2 {
+.heart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.months-label {
     font-family: 'Playfair Display', serif;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
     color: var(--color-terracotta);
-    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
 }
 
-.counter-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+.beating-heart {
+    width: 110px;
+    height: 110px;
+    background: #E85A4F;
+    position: relative;
+    transform: rotate(-45deg);
+    animation: heartPulse 1.3s ease-in-out infinite;
+    box-shadow: 0 0 40px rgba(232, 90, 79, 0.5);
+    margin: 15px auto 10px;
 }
 
-.counter-item {
+.beating-heart::before,
+.beating-heart::after {
+    content: '';
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    background: #E85A4F;
+    border-radius: 50%;
+}
+
+.beating-heart::before {
+    top: -55px;
+    left: 0;
+}
+
+.beating-heart::after {
+    top: 0;
+    left: 55px;
+}
+
+.heart-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -52%) rotate(45deg);
+    z-index: 1;
+}
+
+.small-units {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.5rem;
+    color: var(--color-terracotta);
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.unit {
+    min-width: 45px;
     text-align: center;
 }
 
-.counter-item .number {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--color-coral);
+.separator {
+    color: var(--color-gold);
 }
 
-.counter-item .label {
-    font-size: 0.9rem;
-    color: var(--color-brown);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10% {
+        transform: scale(1.05);
+    }
+    20% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.1);
+    }
+    40% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+@keyframes heartPulse {
+    0%, 100% { transform: rotate(-45deg) scale(1); }
+    10%       { transform: rotate(-45deg) scale(1.08); }
+    20%       { transform: rotate(-45deg) scale(1); }
+    35%       { transform: rotate(-45deg) scale(1.15); }
+    50%       { transform: rotate(-45deg) scale(1); }
 }
 
 /* Messages Section */
@@ -277,6 +355,32 @@ body::before {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+/* Months Navigation */
+.months-navigation {
+    padding: 60px 20px;
+    text-align: center;
+    margin: 40px 0;
+    position: relative;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: var(--color-terracotta);
+    margin-bottom: 50px;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+}
+
+.months-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* Gallery Section */
@@ -608,8 +712,59 @@ footer .signature {
         padding: 10px;
     }
 
-    .counter-item .number {
+    .months-navigation {
+        padding: 40px 15px;
+    }
+
+    .section-title {
         font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .months-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    .time-counter {
+        padding: 20px 15px;
+        margin: 20px 0;
+    }
+
+    .beating-heart {
+        width: 85px;
+        height: 85px;
+        margin: 25px auto 8px;
+    }
+
+    .beating-heart::before,
+    .beating-heart::after {
+        width: 85px;
+        height: 85px;
+    }
+
+    .beating-heart::before {
+        top: -42px;
+        left: 0;
+    }
+
+    .beating-heart::after {
+        top: 0;
+        left: 42px;
+    }
+
+    .heart-number {
+        font-size: 2.5rem;
+    }
+
+    .small-units {
+        font-size: 0.9rem;
+        gap: 6px;
+    }
+
+    .unit {
+        min-width: 30px;
     }
 
     .photo-card.featured img,
@@ -718,4 +873,80 @@ footer .signature {
 #__next_buildwebpack__,
 .next-dev-overlay {
   display: none !important;
+}
+
+/* Scrolling Carousel */
+.scrolling-carousel-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(199, 86, 72, 0.15);
+  margin: 20px 0;
+}
+
+.scrolling-carousel {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: scrollLeft 30s linear infinite;
+}
+
+.scrolling-carousel:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.33%);
+  }
+}
+
+.carousel-slide {
+  flex-shrink: 0;
+  position: relative;
+  width: 300px;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(199, 86, 72, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-slide:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(199, 86, 72, 0.3);
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(45, 27, 27, 0.9), transparent);
+  color: white;
+  padding: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Section Title */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--color-terracotta);
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
 }

@@ -1,141 +1,131 @@
 .photoCard {
   position: relative;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 20px 20px 25px 20px;
-  border-radius: 8px;
-  box-shadow: 0 15px 35px rgba(199, 86, 72, 0.2);
-  transform: rotate(var(--rotation, 0deg));
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: pointer;
+  padding: 0;
+  background: transparent;
   opacity: 0;
-  animation: photoAppear 0.8s ease forwards;
-  border: 2px solid rgba(255, 182, 193, 0.4);
-  content-visibility: auto;
-  contain-intrinsic-size: 430px 430px;
-  max-width: 400px;
-  margin: 0 auto;
+  animation: photoAppear 0.6s ease forwards;
+  transform: rotate(var(--rotation, 0deg));
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.photoCard:hover,
-.photoCard:focus,
-.photoCard.active {
-  transform: rotate(0deg) scale(1.15);
-  box-shadow: 0 30px 60px rgba(199, 86, 72, 0.5);
-  z-index: 100;
-  border-color: #E85A4F;
+.polaroidFrame {
+  background: white;
+  padding: 12px 12px 40px 12px;
+  border-radius: 2px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.photoCard:hover .polaroidFrame {
+  transform: translateY(-8px) rotate(0deg);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
 }
 
 .photoCard:focus {
-  outline: 3px solid #E85A4F;
-  outline-offset: 2px;
+  outline: none;
+}
+
+.photoCard:focus .polaroidFrame {
+  box-shadow: 0 16px 32px rgba(232, 90, 79, 0.2);
+  transform: translateY(-8px) rotate(0deg);
 }
 
 .photoCard.featured {
   grid-column: 1 / -1;
   max-width: 100%;
-  transform: rotate(0deg) scale(1);
-  margin-bottom: 40px;
+  transform: none;
 }
 
-.photoCard.featured:hover,
-.photoCard.featured:focus,
-.photoCard.featured.active {
-  transform: scale(1.02);
-}
-
-.photoCard .image {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  display: block;
-  border-radius: 2px;
-  transition: all 0.4s ease;
-  aspect-ratio: 4 / 3;
-}
-
-.photoCard:hover .image,
-.photoCard:focus .image,
-.photoCard.active .image {
-  height: 350px;
-  object-fit: contain;
-  background: white;
-}
-
-.photoCard.featured .featuredImage {
-  height: 600px;
-  width: 100%;
+.photoCard.featured .polaroidFrame {
+  padding: 16px 16px 50px 16px;
   max-width: 900px;
   margin: 0 auto;
-  transition: all 0.4s ease;
 }
 
-.photoCard.featured:hover .featuredImage,
-.photoCard.featured:focus .featuredImage,
-.photoCard.featured.active .featuredImage {
-  height: 700px;
-  object-fit: contain;
+.photoCard.featured:hover .polaroidFrame {
+  transform: translateY(-4px);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  background: #f5f5f5;
+  aspect-ratio: 4 / 3;
+  max-height: 280px;
+}
+
+.photoCard.featured .image {
+  max-width: 900px;
+  aspect-ratio: 3 / 2;
+  max-height: 550px;
+}
+
+.caption {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: #4a4a4a;
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.4;
+  padding: 0 8px;
+  min-height: auto;
 }
 
 .photoCard.featured .caption {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #E85A4F;
-  font-weight: 600;
-}
-
-.photoCard .caption {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  color: #6B4444;
-  text-align: center;
-  margin-top: 18px;
-  font-style: italic;
-  line-height: 1.4;
-  min-height: 3.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-  padding: 0 5px;
+  margin-top: 20px;
+  font-weight: 500;
 }
 
 @keyframes photoAppear {
   from {
     opacity: 0;
-    transform: scale(0.8) rotate(var(--rotation, 0deg));
+    transform: translateY(20px) rotate(var(--rotation, 0deg));
   }
   to {
     opacity: 1;
-    transform: scale(1) rotate(var(--rotation, 0deg));
+    transform: translateY(0) rotate(var(--rotation, 0deg));
   }
 }
 
 @media (max-width: 768px) {
   .photoCard {
-    max-width: 100%;
-    padding: 15px 15px 20px 15px;
-    word-break: break-word;
-    overflow: hidden;
+    padding: 0;
   }
 
-  .photoCard .caption {
-    font-size: 0.95rem;
-    line-height: 1.3;
-    min-height: 4rem;
-    padding: 0 8px;
+  .polaroidFrame {
+    padding: 10px 10px 32px 10px;
+  }
+
+  .image {
+    max-height: 200px;
+  }
+
+  .caption {
+    font-size: 0.85rem;
+    margin-top: 12px;
+  }
+
+  .photoCard.featured .polaroidFrame {
+    padding: 12px 12px 36px 12px;
+  }
+
+  .photoCard.featured .image {
+    max-height: 280px;
   }
 
   .photoCard.featured .caption {
-    font-size: 1.2rem;
-    padding: 0 10px;
+    font-size: 1.1rem;
+    margin-top: 14px;
   }
 
-  .photoCard.featured .featuredImage {
-    height: 350px;
-  }
-
-  .photoCard .image {
-    height: 200px;
+  .photoCard:hover .polaroidFrame,
+  .photoCard:focus .polaroidFrame {
+    transform: translateY(-4px);
   }
 }

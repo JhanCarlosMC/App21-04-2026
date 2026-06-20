@@ -15,20 +15,17 @@ interface PhotoCardProps {
 }
 
 export default function PhotoCard({ monthSlug, photo, index }: PhotoCardProps) {
-  const [isActive, setIsActive] = useState(false)
-  const [rotation, setRotation] = useState(photo.featured ? 0 : 0)
-  const animationDelay = index * 0.035
+  const [rotation, setRotation] = useState(0)
+  const animationDelay = index * 0.05
 
   const src = `/meses/${monthSlug}/${photo.file}`
 
-  // Generate rotation only on client to avoid hydration mismatch
+  // Generate subtle rotation only on client
   useEffect(() => {
     if (!photo.featured) {
-      setRotation(Math.random() * 6 - 3)
+      setRotation(Math.random() * 4 - 2) // Even more subtle: -2deg to 2deg
     }
   }, [photo.featured])
-
-  const handleClick = () => setIsActive(!isActive)
 
   const cardClass = photo.featured
     ? `${styles.photoCard} ${styles.featured}`
@@ -37,29 +34,26 @@ export default function PhotoCard({ monthSlug, photo, index }: PhotoCardProps) {
   return (
     <div
       className={cardClass}
-      style={{
-        '--rotation': `${rotation}deg`,
-        animationDelay: `${animationDelay}s`
-      } as React.CSSProperties}
-      onClick={handleClick}
+      style={
+        {
+          '--rotation': `${rotation}deg`,
+          animationDelay: `${animationDelay}s`
+        } as React.CSSProperties
+      }
       tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          handleClick()
-        }
-      }}
     >
-      <Image
-        src={src}
-        alt={photo.caption}
-        width={photo.featured ? 900 : 400}
-        height={photo.featured ? 600 : 300}
-        className={photo.featured ? styles.featuredImage : styles.image}
-        priority={photo.featured}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      />
-      <div className={styles.caption}>{photo.caption}</div>
+      <div className={styles.polaroidFrame}>
+        <Image
+          src={src}
+          alt={photo.caption}
+          width={photo.featured ? 900 : 400}
+          height={photo.featured ? 600 : 300}
+          className={styles.image}
+          priority={photo.featured}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+        <div className={styles.caption}>{photo.caption}</div>
+      </div>
     </div>
   )
 }

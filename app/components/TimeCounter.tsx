@@ -16,37 +16,40 @@ export default function TimeCounter({ startDate }: { startDate: string }) {
       const start = new Date(startDate)
       const now = new Date()
 
-      // Calcular diferencia en meses y días
-      let months = 0
-      let days = 0
-      let hours = 0
-      let minutes = 0
-      let seconds = 0
+      // Diferencia total en milisegundos
+      const diffMs = now.getTime() - start.getTime()
 
       // Calcular meses completos
       const yearDiff = now.getFullYear() - start.getFullYear()
       const monthDiff = now.getMonth() - start.getMonth()
-      months = yearDiff * 12 + monthDiff
+      let totalMonths = yearDiff * 12 + monthDiff
 
-      // Ajustar si el día actual es menor al día de inicio
-      const tempDate = new Date(start)
-      tempDate.setMonth(tempDate.getMonth() + months)
-      if (now.getDate() < start.getDate()) {
-        months--
-        tempDate.setMonth(tempDate.getMonth() - 1)
+      // Ajustar meses si el día actual es menor al día de inicio
+      // o si es el mismo día pero la hora es menor
+      if (now.getDate() < start.getDate() ||
+          (now.getDate() === start.getDate() && now.getHours() < start.getHours())) {
+        totalMonths--
       }
 
-      // Calcular días restantes
-      const dayDiff = Math.floor((now.getTime() - tempDate.getTime()) / (1000 * 60 * 60 * 24))
-      days = dayDiff
+      // Fecha del último mes completo
+      const lastMonthDate = new Date(start)
+      lastMonthDate.setMonth(lastMonthDate.getMonth() + totalMonths)
 
-      // Calcular horas, minutos, segundos
-      const diff = now.getTime() - start.getTime()
-      hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-      seconds = Math.floor((diff % (1000 * 60)) / 1000)
+      // Tiempo restante desde el último mes completo
+      const remainingMs = now.getTime() - lastMonthDate.getTime()
+      const remainingSeconds = Math.floor(remainingMs / 1000)
+      const days = Math.floor(remainingSeconds / 86400) // 86400 = 24 * 60 * 60
+      const hours = Math.floor((remainingSeconds % 86400) / 3600)
+      const minutes = Math.floor((remainingSeconds % 3600) / 60)
+      const seconds = remainingSeconds % 60
 
-      setTime({ months, days, hours, minutes, seconds })
+      setTime({
+        months: Math.max(1, totalMonths),
+        days,
+        hours,
+        minutes,
+        seconds
+      })
     }
 
     calculateTime()

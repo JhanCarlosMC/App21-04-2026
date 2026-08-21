@@ -1,148 +1,128 @@
 .videoCard {
   position: relative;
-  padding: 0;
-  background: transparent;
+  min-width: 0;
+  height: auto;
+  align-self: start;
   opacity: 0;
-  animation: photoAppear 0.6s ease forwards;
-  transform: rotate(var(--rotation, 0deg));
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: photoAppear 0.65s ease forwards;
 }
 
 .polaroidFrame {
-  background: white;
-  padding: 12px 12px 40px 12px;
-  border-radius: 2px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  position: relative;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 0;
   overflow: hidden;
+  background: rgba(255, 252, 253, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.94);
+  border-radius: 22px;
+  box-shadow: 0 14px 38px rgba(123, 45, 50, 0.13);
+  backdrop-filter: blur(12px);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
 .videoCard:hover .polaroidFrame {
-  transform: translateY(-8px) rotate(0deg);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
-}
-
-.videoCard:focus {
-  outline: none;
-}
-
-.videoCard:focus .polaroidFrame {
-  box-shadow: 0 16px 32px rgba(232, 90, 79, 0.2);
-  transform: translateY(-8px) rotate(0deg);
-}
-
-.videoCard.featured {
-  grid-column: 1 / -1;
-  max-width: 100%;
-  transform: none;
-}
-
-.videoCard.featured .polaroidFrame {
-  padding: 16px 16px 50px 16px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.videoCard.featured:hover .polaroidFrame {
-  transform: translateY(-4px);
+  transform: translateY(-7px);
+  border-color: rgba(199, 86, 72, 0.28);
+  box-shadow: 0 24px 52px rgba(123, 45, 50, 0.2);
 }
 
 .videoContainer {
   position: relative;
   width: 100%;
-  background: #000;
-  border-radius: 1px;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
+  background: #211619;
+  border-radius: 15px;
 }
 
 .video {
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  height: 100%;
   display: block;
-  aspect-ratio: 4 / 3;
-  max-height: 280px;
+  object-fit: contain;
+  pointer-events: none;
 }
 
-.videoCard.featured .video {
-  max-width: 900px;
-  aspect-ratio: 3 / 2;
-  max-height: 550px;
-}
-
-.hiddenCanvas {
-  display: none;
+.video.playing {
+  pointer-events: auto;
 }
 
 .playOverlay {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
   cursor: pointer;
-  transition: opacity 0.3s ease;
+  z-index: 10;
 }
 
-.playOverlay:hover .playIcon {
-  transform: scale(1.1);
+.playOverlay:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.95);
+  outline-offset: -6px;
 }
 
-.playOverlay:hover .playIconWrapper {
-  background: rgba(232, 90, 79, 0.9);
-}
-
-.thumbnail {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.85);
-}
-
+.thumbnail,
+.thumbnailPlaceholder,
 .thumbnailOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+}
+
+.thumbnail {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: brightness(0.78) saturate(0.9);
+  transition: transform 0.55s ease, filter 0.4s ease;
+  z-index: 1;
+}
+
+.videoCard:hover .thumbnail {
+  transform: scale(1.045);
+  filter: brightness(0.88) saturate(0.95);
+}
+
+.thumbnailPlaceholder {
+  background: linear-gradient(135deg, #F4D9DE, #DFA7B1);
+  z-index: 1;
+}
+
+.thumbnailOverlay {
+  background: linear-gradient(to top, rgba(28, 10, 14, 0.38), transparent 65%);
   pointer-events: none;
-}
-
-.loadingSpinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(255, 255, 255, 0.2);
-  border-top-color: rgba(232, 90, 79, 0.9);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  z-index: 2;
 }
 
 .playIconWrapper {
-  position: relative;
-  z-index: 2;
-  width: 56px;
-  height: 56px;
-  background: rgba(232, 90, 79, 0.85);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  background: rgba(222, 77, 70, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.78);
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 12px 28px rgba(32, 10, 14, 0.34);
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease, background 0.3s ease;
+  z-index: 3;
+}
+
+.playOverlay:hover .playIconWrapper {
+  background: #D94D45;
+  transform: translate(-50%, -50%) scale(1.08);
 }
 
 .playIcon {
+  margin-left: 3px;
   color: white;
   font-size: 20px;
-  margin-left: 3px;
-  transition: transform 0.3s ease;
 }
 
 .playIcon.error {
@@ -150,95 +130,108 @@
   font-size: 24px;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-  50% {
-    box-shadow: 0 4px 25px rgba(232, 90, 79, 0.5);
-  }
-}
-
 .caption {
+  min-height: 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 14px 18px;
+  color: #573336;
   font-family: 'Playfair Display', serif;
-  font-size: 0.95rem;
-  color: #4a4a4a;
-  text-align: center;
-  margin-top: 16px;
+  font-size: 1rem;
   line-height: 1.4;
-  padding: 0 8px;
-  min-height: auto;
+  text-align: center;
 }
 
-.videoCard.featured .caption {
-  font-size: 1.4rem;
-  color: #E85A4F;
-  margin-top: 20px;
-  font-weight: 500;
+.featured {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: auto;
 }
 
-.videoCard.featured .playIconWrapper {
-  width: 72px;
-  height: 72px;
+.featured .polaroidFrame {
+  padding: 14px 14px 0;
+  border-radius: 28px;
+  box-shadow: 0 22px 60px rgba(123, 45, 50, 0.18);
 }
 
-.videoCard.featured .playIcon {
-  font-size: 26px;
+.featured .videoContainer {
+  height: clamp(440px, 54vw, 680px);
+  aspect-ratio: auto;
+  border-radius: 20px;
+}
+
+.featured .video {
+  object-fit: contain;
+}
+
+.featured .caption {
+  min-height: 112px;
+  padding: 20px 18px 24px;
+  color: #7E3535;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+}
+
+.featuredLabel {
+  color: #A94742;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 @keyframes photoAppear {
   from {
     opacity: 0;
-    transform: translateY(20px) rotate(var(--rotation, 0deg));
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotate(var(--rotation, 0deg));
+    transform: translateY(0);
   }
 }
 
 @media (max-width: 768px) {
-  .videoCard {
-    padding: 0;
-  }
-
   .polaroidFrame {
-    padding: 10px 10px 32px 10px;
+    border-radius: 18px;
   }
 
-  .video {
-    max-height: 200px;
-  }
-
-  .playIconWrapper {
-    width: 48px;
-    height: 48px;
-  }
-
-  .playIcon {
-    font-size: 18px;
+  .videoContainer {
+    border-radius: 12px;
   }
 
   .caption {
-    font-size: 0.85rem;
-    margin-top: 12px;
+    min-height: 76px;
+    padding: 13px 10px 15px;
+    font-size: 0.92rem;
   }
 
-  .videoCard.featured .polaroidFrame {
-    padding: 12px 12px 36px 12px;
+  .featured .polaroidFrame {
+    padding: 9px 9px 0;
+    border-radius: 22px;
   }
 
-  .videoCard.featured .video {
-    max-height: 280px;
+  .featured .videoContainer {
+    height: clamp(390px, 125vw, 560px);
+    border-radius: 15px;
   }
 
-  .videoCard.featured .caption {
-    font-size: 1.1rem;
-    margin-top: 14px;
+  .featured .caption {
+    min-height: 96px;
+    padding: 16px 12px 20px;
+    font-size: 1.15rem;
   }
+}
 
-  .videoCard:hover .polaroidFrame,
-  .videoCard:focus .polaroidFrame {
-    transform: translateY(-4px);
+@media (prefers-reduced-motion: reduce) {
+  .videoCard,
+  .thumbnail {
+    animation: none;
+    opacity: 1;
+    transition: none;
   }
 }

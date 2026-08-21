@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { useState, type SyntheticEvent } from 'react'
 import styles from './PhotoCard.module.css'
 
 interface PhotoCardProps {
@@ -15,17 +15,10 @@ interface PhotoCardProps {
 }
 
 export default function PhotoCard({ monthSlug, photo, index }: PhotoCardProps) {
-  const [rotation, setRotation] = useState(0)
   const animationDelay = index * 0.05
+  const [naturalRatio, setNaturalRatio] = useState<string>()
 
   const src = `/meses/${monthSlug}/${photo.file}`
-
-  // Generate subtle rotation only on client
-  useEffect(() => {
-    if (!photo.featured) {
-      setRotation(Math.random() * 4 - 2) // Even more subtle: -2deg to 2deg
-    }
-  }, [photo.featured])
 
   const cardClass = photo.featured
     ? `${styles.photoCard} ${styles.featured}`
@@ -34,25 +27,45 @@ export default function PhotoCard({ monthSlug, photo, index }: PhotoCardProps) {
   return (
     <div
       className={cardClass}
-      style={
-        {
-          '--rotation': `${rotation}deg`,
-          animationDelay: `${animationDelay}s`
-        } as React.CSSProperties
-      }
-      tabIndex={0}
+      style={{ animationDelay: `${animationDelay}s` }}
     >
       <div className={styles.polaroidFrame}>
-        <Image
-          src={src}
-          alt={photo.caption}
-          width={photo.featured ? 900 : 400}
-          height={photo.featured ? 600 : 300}
-          className={styles.image}
-          priority={photo.featured}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-        <div className={styles.caption}>{photo.caption}</div>
+        <div
+          className={styles.mediaStage}
+          style={!photo.featured && naturalRatio ? { aspectRatio: naturalRatio } : undefined}
+        >
+          {photo.featured && (
+            <Image
+              src={src}
+              alt=""
+              fill
+              aria-hidden="true"
+              className={styles.featuredBackdrop}
+              sizes="100vw"
+            />
+          )}
+          <Image
+            src={src}
+            alt={photo.caption}
+            fill
+            className={styles.image}
+            preload={photo.featured}
+            onLoad={(event: SyntheticEvent<HTMLImageElement>) => {
+              const { naturalWidth, naturalHeight } = event.currentTarget
+
+              if (!photo.featured && naturalWidth > 0 && naturalHeight > 0) {
+                setNaturalRatio(`${naturalWidth} / ${naturalHeight}`)
+              }
+            }}
+            sizes={photo.featured
+              ? '(max-width: 768px) 100vw, 1200px'
+              : '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'}
+          />
+        </div>
+        <div className={styles.caption}>
+          {photo.featured && <span className={styles.featuredLabel}>Recuerdo destacado</span>}
+          <span>{photo.caption}</span>
+        </div>
       </div>
     </div>
   )

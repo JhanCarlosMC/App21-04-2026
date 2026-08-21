@@ -7,16 +7,20 @@ export default function FloatingHearts() {
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    // Generate hearts only on client side to avoid hydration mismatch
-    const generatedHearts = Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-      animationDelay: Math.random() * 15,
-      animationDuration: 15 + Math.random() * 10
-    }))
-    setHearts(generatedHearts)
-    setIsMounted(true)
+    const frame = window.requestAnimationFrame(() => {
+      // Generate hearts only on client side to avoid hydration mismatch
+      const generatedHearts = Array.from({ length: 20 }, (_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        animationDelay: Math.random() * 15,
+        animationDuration: 15 + Math.random() * 10
+      }))
+      setHearts(generatedHearts)
+      setIsMounted(true)
+    })
+
+    return () => window.cancelAnimationFrame(frame)
   }, [])
 
   // Don't render until mounted on client

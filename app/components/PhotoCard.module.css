@@ -1,131 +1,171 @@
 .photoCard {
   position: relative;
-  padding: 0;
-  background: transparent;
+  min-width: 0;
+  height: auto;
+  align-self: start;
   opacity: 0;
-  animation: photoAppear 0.6s ease forwards;
-  transform: rotate(var(--rotation, 0deg));
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: photoAppear 0.65s ease forwards;
 }
 
 .polaroidFrame {
-  background: white;
-  padding: 12px 12px 40px 12px;
-  border-radius: 2px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 0;
   overflow: hidden;
+  background: rgba(255, 252, 253, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.94);
+  border-radius: 22px;
+  box-shadow: 0 14px 38px rgba(123, 45, 50, 0.13);
+  backdrop-filter: blur(12px);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
 .photoCard:hover .polaroidFrame {
-  transform: translateY(-8px) rotate(0deg);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(-7px);
+  border-color: rgba(199, 86, 72, 0.28);
+  box-shadow: 0 24px 52px rgba(123, 45, 50, 0.2);
 }
 
-.photoCard:focus {
-  outline: none;
-}
-
-.photoCard:focus .polaroidFrame {
-  box-shadow: 0 16px 32px rgba(232, 90, 79, 0.2);
-  transform: translateY(-8px) rotate(0deg);
-}
-
-.photoCard.featured {
-  grid-column: 1 / -1;
-  max-width: 100%;
-  transform: none;
-}
-
-.photoCard.featured .polaroidFrame {
-  padding: 16px 16px 50px 16px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.photoCard.featured:hover .polaroidFrame {
-  transform: translateY(-4px);
+.mediaStage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #F7E6E9, #EECBD2);
+  isolation: isolate;
 }
 
 .image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  display: block;
-  background: #f5f5f5;
-  aspect-ratio: 4 / 3;
-  max-height: 280px;
+  object-fit: contain;
+  object-position: center;
+  z-index: 2;
+  transition: transform 0.55s ease;
 }
 
-.photoCard.featured .image {
-  max-width: 900px;
-  aspect-ratio: 3 / 2;
-  max-height: 550px;
+.photoCard:not(.featured):hover .image {
+  transform: scale(1.015);
+}
+
+.featuredBackdrop {
+  object-fit: cover;
+  filter: blur(28px) brightness(0.68) saturate(0.85);
+  opacity: 0.72;
+  transform: scale(1.12);
+  z-index: 1;
 }
 
 .caption {
+  min-height: 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 14px 18px;
+  color: #573336;
   font-family: 'Playfair Display', serif;
-  font-size: 0.95rem;
-  color: #4a4a4a;
-  text-align: center;
-  margin-top: 16px;
+  font-size: 1rem;
   line-height: 1.4;
-  padding: 0 8px;
-  min-height: auto;
+  text-align: center;
 }
 
-.photoCard.featured .caption {
-  font-size: 1.4rem;
-  color: #E85A4F;
-  margin-top: 20px;
-  font-weight: 500;
+.featured {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: auto;
+}
+
+.featured .polaroidFrame {
+  padding: 14px 14px 0;
+  border-radius: 28px;
+  box-shadow: 0 22px 60px rgba(123, 45, 50, 0.18);
+}
+
+.featured .mediaStage {
+  height: clamp(440px, 54vw, 680px);
+  aspect-ratio: auto;
+  border-radius: 20px;
+  background: #2F1E22;
+}
+
+.featured .image {
+  object-fit: contain;
+  object-position: center;
+  padding: 18px;
+  filter: drop-shadow(0 16px 30px rgba(25, 9, 12, 0.28));
+}
+
+.featured .caption {
+  min-height: 112px;
+  padding: 20px 18px 24px;
+  color: #7E3535;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+}
+
+.featuredLabel {
+  color: #A94742;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 @keyframes photoAppear {
   from {
     opacity: 0;
-    transform: translateY(20px) rotate(var(--rotation, 0deg));
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotate(var(--rotation, 0deg));
+    transform: translateY(0);
   }
 }
 
 @media (max-width: 768px) {
-  .photoCard {
-    padding: 0;
-  }
-
   .polaroidFrame {
-    padding: 10px 10px 32px 10px;
+    border-radius: 18px;
   }
 
-  .image {
-    max-height: 200px;
+  .mediaStage {
+    border-radius: 12px;
   }
 
   .caption {
-    font-size: 0.85rem;
-    margin-top: 12px;
+    min-height: 76px;
+    padding: 13px 10px 15px;
+    font-size: 0.92rem;
   }
 
-  .photoCard.featured .polaroidFrame {
-    padding: 12px 12px 36px 12px;
+  .featured .polaroidFrame {
+    padding: 9px 9px 0;
+    border-radius: 22px;
   }
 
-  .photoCard.featured .image {
-    max-height: 280px;
+  .featured .mediaStage {
+    height: clamp(390px, 125vw, 560px);
+    border-radius: 15px;
   }
 
-  .photoCard.featured .caption {
-    font-size: 1.1rem;
-    margin-top: 14px;
+  .featured .image {
+    padding: 10px;
   }
 
-  .photoCard:hover .polaroidFrame,
-  .photoCard:focus .polaroidFrame {
-    transform: translateY(-4px);
+  .featured .caption {
+    min-height: 96px;
+    padding: 16px 12px 20px;
+    font-size: 1.15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoCard,
+  .image {
+    animation: none;
+    opacity: 1;
+    transition: none;
   }
 }

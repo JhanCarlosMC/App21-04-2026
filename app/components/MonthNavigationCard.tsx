@@ -8,6 +8,7 @@ interface Photo {
   file: string
   caption: string
   featured?: boolean
+  poster?: string
 }
 
 interface Month {
@@ -42,9 +43,10 @@ export default function MonthNavigationCard({ month }: MonthNavigationCardProps)
           {isVideo ? (
             <video
               src={src}
+              poster={featuredPhoto.poster ? `/meses/${month.slug}/${featuredPhoto.poster}` : undefined}
               className={styles.thumbnail}
               muted
-              preload="metadata"
+              preload="none"
               onMouseEnter={(e) => {
                 const video = e.target as HTMLVideoElement
                 video.play().catch(() => {})

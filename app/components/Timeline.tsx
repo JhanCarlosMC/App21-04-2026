@@ -25,7 +25,7 @@ export default function Timeline({ items }: TimelineProps) {
       <div className={styles.timelineContainer}>
         <div className={styles.timelineLine} />
 
-        {items.map((item, index) => (
+        {items.map((item) => (
           <div key={`${item.month}-${item.index}`} className={styles.timelineItem}>
             <div className={styles.timelineDot} />
             <div className={styles.timelineContent}>

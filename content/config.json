@@ -1,7 +1,7 @@
 {
   "startDate": "2026-03-21T23:00:00",
-  "heroTitle": "Tres Meses Juntos",
-  "heroSubtitle": "Un recap de todo lo bonito que hemos vivido",
+  "heroTitle": "Nuestro Álbum de Amor",
+  "heroSubtitle": "Contigo, cada instante se vuelve recuerdo y cada recuerdo, una razón más para amarte.",
   "messages": [
     "En estos dos meses, me has enseñado que el amor verdadero no se mide en tiempo, sino en la cantidad de momentos que nos hacen sonreír.",
     "Cada mes tiene sus propias historias, pero mi favorita sigue siendo la que estamos escribiendo juntos día a día.",
@@ -10,48 +10,58 @@
   "recapPhotos": [
     {
       "month": "primer-mes",
-      "file": "Especial.JPG",
+      "file": "Especial.webp",
       "caption": "21/03/26: El día que te pregunté si querías ser mi novia y mi vida cambió para siempre 💍"
     },
     {
       "month": "segundo-mes",
-      "file": "IMG_8934.JPG",
+      "file": "IMG_8934.webp",
       "caption": "Cada beso es un capítulo más de nuestra historia 💏"
     },
     {
       "month": "primer-mes",
-      "file": "IMG_6822.JPG",
+      "file": "IMG_6822.webp",
       "caption": "Cada momento contigo es un tesoro en mi corazón 💖"
     },
     {
       "month": "primer-mes",
-      "file": "IMG_8343.JPG",
+      "file": "IMG_8343.webp",
       "caption": "Atardecer contigo, siempre vale la pena 🌅"
     },
     {
       "month": "segundo-mes",
-      "file": "IMG_9058.JPG",
+      "file": "IMG_9058.webp",
       "caption": "Para siempre, es lo que prometo cada día contigo 💝"
     },
     {
       "month": "tercer-mes",
-      "file": "0.Carrusel.JPG",
+      "file": "0.Carrusel.webp",
       "caption": "Tres meses y no me canso de amarte 🎉"
     },
     {
       "month": "tercer-mes",
-      "file": "0.Carusel.PNG",
+      "file": "0.Carusel.webp",
       "caption": "Cada día a tu lado es un regalo 🎁"
     },
     {
       "month": "cuarto-mes",
-      "file": "0.Carrusel.JPG",
+      "file": "0.Carrusel.webp",
       "caption": "Cuatro meses de ti y sigo enamorándome más 💝"
     },
     {
       "month": "cuarto-mes",
-      "file": "0.Carrusel2.JPG",
+      "file": "0.Carrusel2.webp",
       "caption": "Cada día a tu lado es una nueva aventura 🚀"
+    },
+    {
+      "month": "quinto-mes",
+      "file": "0.Carrucel.webp",
+      "caption": "Cinco meses y mi amor por ti sigue creciendo 💕"
+    },
+    {
+      "month": "quinto-mes",
+      "file": "0.Carrucel2.webp",
+      "caption": "Cinco meses de aventuras increíbles contigo 🌟"
     }
   ]
 }

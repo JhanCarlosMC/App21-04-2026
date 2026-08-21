@@ -2,6 +2,7 @@ import { getConfig, getAllMonths } from '@/lib/content'
 import TimeCounter from './components/TimeCounter'
 import ScrollingCarousel from './components/ScrollingCarousel'
 import History from './components/History'
+import DateAlbumPreview from './components/DateAlbumPreview'
 
 function numberToText(num: number): string {
   const units = ['', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve']
@@ -34,7 +35,7 @@ export default function HomePage() {
   const meses = getAllMonths()
   const monthsCount = meses.length
   const monthsText = numberToText(monthsCount)
-  const dynamicTitle = `${monthsText} Meses Juntos`
+  const heroEyebrow = `${monthsText} meses · una historia para siempre`
 
   // Crear items para History - una foto destacada de cada mes
   const historyItems = meses.flatMap((mes) => {
@@ -44,8 +45,11 @@ export default function HomePage() {
       month: mes.slug,
       monthTitle: mes.title.split(' ')[0], // Solo "Primer", "Segundo", etc.
       monthFullTitle: mes.title,
-      monthDate: (mes as any).date,
-      photo: featuredPhoto,
+      monthDate: mes.date,
+      photo: {
+        ...featuredPhoto,
+        caption: mes.timelineCaption || featuredPhoto.caption
+      },
       index: mes.order
     }]
   })
@@ -53,17 +57,27 @@ export default function HomePage() {
   return (
     <div className="container">
       <section className="hero">
-        <h1>{dynamicTitle}</h1>
-        <p className="subtitle">{config.heroSubtitle}</p>
+        <p className="hero-eyebrow">{heroEyebrow}</p>
+        <h1>{config.heroTitle}</h1>
+        <div className="hero-flourish" aria-hidden="true">
+          <span />
+          <b>♥</b>
+          <span />
+        </div>
       </section>
 
-      <TimeCounter startDate={config.startDate} />
+      <section className="hero-content">
+        <p className="subtitle">{config.heroSubtitle}</p>
+        <TimeCounter startDate={config.startDate} />
+      </section>
 
       <section className="recap-section">
         <ScrollingCarousel photos={config.recapPhotos} />
       </section>
 
       <History items={historyItems} />
+
+      <DateAlbumPreview />
 
       <footer>
         <p>Para ti, con todo mi amor</p>

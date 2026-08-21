@@ -2,69 +2,75 @@
   "slug": "tercer-mes",
   "title": "Tercer Mes",
   "description": "Tres meses contigo y cada día me enamoro más de ti. Gracias por ser mi todo.",
-  "date": "Mayo - Junio2026",
+  "timelineCaption": "Regalos, planes y recuerdos que son muy nuestros 🎁",
+  "date": "Mayo – Junio 2026",
   "order": 3,
   "photos": [
     {
-      "file": "0.Featured.JPG",
-      "caption": "Nuestro tercer mes juntos 💕",
+      "file": "0.Featured.webp",
+      "caption": "Una noche de música y luces para celebrar nuestro tercer mes 🎶",
       "featured": true
     },
     {
-      "file": "0.important.JPG",
-      "caption": "Momento especial que atesoro 💎"
+      "file": "0.important.webp",
+      "caption": "Con la camiseta de Colombia y la sonrisa de estar juntos 🇨🇴"
     },
     {
-      "file": "0.Carusel.PNG",
-      "caption": "Otro recuerdo hermoso de ti 🌸"
+      "file": "0.Carusel.webp",
+      "caption": "Un beso con nuestras camisetas combinadas y toda la emoción del partido 💋"
     },
     {
-      "file": "IMG_9261.JPG",
-      "caption": "Sonrisas que ilumitan mi día ☀️"
+      "file": "IMG_9261.webp",
+      "caption": "Una selfie bajo las luces de aquella salida nocturna 🌃"
     },
     {
-      "file": "IMG_9454.JPG",
-      "caption": "Juntos es todo mejor 🌟"
+      "file": "IMG_9454.webp",
+      "caption": "Un beso en la mejilla durante una comida tranquila juntos 😘"
     },
     {
-      "file": "IMG_9479.JPG",
-      "caption": "Tu mirada me hipnotiza 👀"
+      "file": "IMG_9479.webp",
+      "caption": "Nuestra foto frente al espejo después de entrenar juntos 🏋️"
     },
     {
-      "file": "IMG_9483.JPG",
-      "caption": "Abrazos que curan todo 🤗"
+      "file": "IMG_9483.webp",
+      "caption": "Un abrazo entre pesas que hizo más ligero el entrenamiento 🤗"
     },
     {
-      "file": "IMG_9547.JPG",
-      "caption": "Felicidad en su máxima expresión ✨"
+      "file": "IMG_9547.webp",
+      "caption": "Bajo las luces azules, otra noche de música y sonrisas 💙"
     },
     {
-      "file": "IMG_9575.JPG",
-      "caption": "Cada instante contigo vale oro 🏆"
+      "file": "IMG_9575.webp",
+      "caption": "Combinados con la camiseta de Colombia y listos para celebrar 🇨🇴"
     },
     {
-      "file": "faef3818-0488-4c61-a3ae-9e97622ed136.jpg",
-      "caption": "Recuerdo hermoso de ti 💝"
+      "file": "faef3818-0488-4c61-a3ae-9e97622ed136.webp",
+      "caption": "Ese beso en la mejilla que siempre me saca una sonrisa 😊"
     },
     {
-      "file": "4dd368d4-cb23-4bbc-89df-19cc2addaa64.mov",
-      "caption": "Sonrisas que guardo en mi corazón 💓"
+      "file": "4dd368d4-cb23-4bbc-89df-19cc2addaa64.web.mp4",
+      "caption": "Un filtro de gatita y tu forma de hacer divertido cualquier momento 🐱",
+      "poster": "4dd368d4-cb23-4bbc-89df-19cc2addaa64.poster.webp"
     },
     {
-      "file": "IMG_9450.MOV",
-      "caption": "Videos que se quedan grabados en mi alma 🎬"
+      "file": "IMG_9450.web.mp4",
+      "caption": "Una pausa sobre el césped, con nuestros jeans y el día por delante 🌱",
+      "poster": "IMG_9450.poster.webp"
     },
     {
-      "file": "IMG_9539.MOV",
-      "caption": "Risas que nunca olvidaré 😄"
+      "file": "IMG_9539.web.mp4",
+      "caption": "Nosotros entre luces moradas, disfrutando la música de aquella noche 🎵",
+      "poster": "IMG_9539.poster.webp"
     },
     {
-      "file": "IMG_9578.MOV",
-      "caption": "Momentos mágicos juntos 🌈"
+      "file": "IMG_9578.web.mp4",
+      "caption": "Una sonrisa compartida con nuestras camisetas de Colombia 💛",
+      "poster": "IMG_9578.poster.webp"
     },
     {
-      "file": "IMG_9586.MOV",
-      "caption": "Para siempre, mi amor 💑"
+      "file": "IMG_9586.web.mp4",
+      "caption": "Gestos, risas y complicidad durante aquella celebración 🇨🇴",
+      "poster": "IMG_9586.poster.webp"
     }
   ]
 }

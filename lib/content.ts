@@ -5,12 +5,15 @@ export interface Photo {
   file: string
   caption: string
   featured?: boolean
+  poster?: string
 }
 
 export interface Month {
   slug: string
   title: string
   description: string
+  timelineCaption?: string
+  date?: string
   order: number
   photos: Photo[]
 }
@@ -20,7 +23,7 @@ export interface Config {
   heroTitle: string
   heroSubtitle: string
   messages: string[]
-  recapPhotos: Array<{ month: string; file: string; caption: string }>
+  recapPhotos: Array<{ month: string; file: string; caption: string; poster?: string }>
 }
 
 const contentDir = path.join(process.cwd(), 'content')

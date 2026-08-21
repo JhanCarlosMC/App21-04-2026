@@ -24,44 +24,62 @@ export default async function MonthPage({ params }: { params: Promise<{ mes: str
 
   return (
     <div className="container month-page">
-      <Link href="/" className="back-link">← Volver al inicio</Link>
+      <Link href="/" className="back-link">
+        <span aria-hidden="true">←</span>
+        Nuestro álbum
+      </Link>
 
-      <section className="hero">
+      <header className="month-hero">
+        <p className="month-eyebrow">Capítulo {mes.order} · {mes.date}</p>
         <h1>{mes.title}</h1>
-        <p className="subtitle">{mes.description}</p>
-      </section>
+        <p className="month-description">{mes.description}</p>
+        <div className="month-flourish" aria-hidden="true">
+          <span />
+          <b>♥</b>
+          <span />
+        </div>
+      </header>
 
-      <div className="gallery-grid">
-        {mes.photos.map((photo, index) => {
-          const isVideo = /\.(mov|mp4)$/i.test(photo.file)
-          return isVideo ? (
-            <VideoCard
-              key={photo.file}
-              monthSlug={mes.slug}
-              photo={photo}
-              index={index}
-            />
-          ) : (
-            <PhotoCard
-              key={photo.file}
-              monthSlug={mes.slug}
-              photo={photo}
-              index={index}
-            />
-          )
-        })}
-      </div>
+      <section className="month-gallery" aria-labelledby="gallery-title">
+        <div className="gallery-heading">
+          <p>Instantes para volver a vivir</p>
+          <h2 id="gallery-title">Recuerdos de este mes</h2>
+        </div>
+
+        <div className="gallery-grid">
+          {mes.photos.map((photo, index) => {
+            const isVideo = /\.(mov|mp4)$/i.test(photo.file)
+            return isVideo ? (
+              <VideoCard
+                key={photo.file}
+                monthSlug={mes.slug}
+                photo={photo}
+                index={index}
+              />
+            ) : (
+              <PhotoCard
+                key={photo.file}
+                monthSlug={mes.slug}
+                photo={photo}
+                index={index}
+              />
+            )
+          })}
+        </div>
+      </section>
 
       {(prevMes || nextMes) && (
         <div className="month-navigation">
           {prevMes && (
             <Link href={`/meses/${prevMes.slug}`} className="nav-btn prev">
-              ← {prevMes.title}
+              <span>Capítulo anterior</span>
+              <strong>← {prevMes.title}</strong>
             </Link>
           )}
           {nextMes && (
             <Link href={`/meses/${nextMes.slug}`} className="nav-btn next">
-              {nextMes.title} →
+              <span>Siguiente capítulo</span>
+              <strong>{nextMes.title} →</strong>
             </Link>
           )}
         </div>

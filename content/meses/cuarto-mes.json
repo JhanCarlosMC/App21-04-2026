@@ -2,97 +2,103 @@
   "slug": "cuarto-mes",
   "title": "Cuarto Mes",
   "description": "Cuatro meses de ti y sigo descubriendo nuevas razones para amarte. Cada día a tu lado es un regalo que no cambiaría por nada.",
-  "date": "Junio - Julio 2026",
+  "timelineCaption": "Paseos, risas y aventuras que nos acercaron todavía más 🚀",
+  "date": "Junio – Julio 2026",
   "order": 4,
   "photos": [
     {
-      "file": "0.Featured.JPG",
-      "caption": "Nuestro cuarto mes juntos 💕",
+      "file": "0.Featured.webp",
+      "caption": "Un abrazo bajo un cielo encendido para celebrar nuestro cuarto mes 🌅",
       "featured": true
     },
     {
-      "file": "0.Carrusel.JPG",
-      "caption": "Cuatro meses y mi amor crece más cada día 🎉"
+      "file": "0.Carrusel.webp",
+      "caption": "Nuestro beso en la noche, lejos del ruido y cerca el uno del otro 🌙"
     },
     {
-      "file": "0.Carrusel2.JPG",
-      "caption": "Contigo cuatro meses se sienten como segundos ⏰💕"
+      "file": "0.Carrusel2.webp",
+      "caption": "Abrazados junto a aquellas escaleras llenas de color ✨"
     },
     {
-      "file": "0.Important.mov",
-      "caption": "Momento especial que atesoro 💎"
+      "file": "0.Important.web.mp4",
+      "caption": "Una celebración con camisetas de Colombia, besos y muchas risas 🇨🇴",
+      "poster": "0.Important.poster.webp"
     },
     {
-      "file": "0.Important2.mov",
-      "caption": "Videos que se quedan grabados en mi corazón 🎬"
+      "file": "0.Important2.web.mp4",
+      "caption": "El mensaje con el que comenzó la emoción de cumplir cuatro meses 🎬",
+      "poster": "0.Important2.poster.webp"
     },
     {
-      "file": "387cf5a4-be4c-4e7e-b382-37e5b4f54a89.jpg",
-      "caption": "Recuerdo hermoso de nosotros 🌸"
+      "file": "387cf5a4-be4c-4e7e-b382-37e5b4f54a89.webp",
+      "caption": "Nuestra tarde de cometas reunida en un collage lleno de cielo y color 🪁"
     },
     {
-      "file": "4846e951-6fc5-4174-8da2-c4d8d794e750.jpg",
-      "caption": "Sonrisas que iluminan mi día ☀️"
+      "file": "4846e951-6fc5-4174-8da2-c4d8d794e750.webp",
+      "caption": "Aprendiendo a patinar juntos, entre equilibrio, ayuda y muchas risas 🛼"
     },
     {
-      "file": "IMG_0043.JPG",
-      "caption": "Abrazos que curan todo 🤗"
+      "file": "IMG_0043.webp",
+      "caption": "Tus patines rosados junto a los míos antes de empezar a rodar 🛼"
     },
     {
-      "file": "IMG_0044.JPG",
-      "caption": "Juntos es todo mejor 🌟"
+      "file": "IMG_0044.webp",
+      "caption": "Una selfie desde arriba después de ponernos los patines 😎"
     },
     {
-      "file": "IMG_0048.mov",
-      "caption": "Risas que nunca olvidaré 😄"
+      "file": "IMG_0048.web.mp4",
+      "caption": "Rodando bajo un cielo enorme durante nuestra tarde de patines ☁️",
+      "poster": "IMG_0048.poster.webp"
     },
     {
-      "file": "IMG_0121.JPG",
-      "caption": "Tu mirada me hipnotiza 👀"
+      "file": "IMG_0121.webp",
+      "caption": "Una foto juntos al pie de aquellas escaleras iluminadas 🌈"
     },
     {
-      "file": "IMG_0182.MOV",
-      "caption": "Momentos mágicos juntos 🌈"
+      "file": "IMG_0182.web.mp4",
+      "caption": "Pasos nocturnos sobre las calles de piedra de aquel paseo 🌙",
+      "poster": "IMG_0182.poster.webp"
     },
     {
-      "file": "IMG_0211.MOV",
-      "caption": "Para siempre, mi amor 💑"
+      "file": "IMG_0211.web.mp4",
+      "caption": "Tu sonrisa bajo las nubes mientras disfrutábamos la tarde ☁️",
+      "poster": "IMG_0211.poster.webp"
     },
     {
-      "file": "IMG_0234.JPG",
-      "caption": "Felicidad en su máxima expresión ✨"
+      "file": "IMG_0234.webp",
+      "caption": "Cometas, familia, una mascota y un cielo perfecto para compartir 🪁"
     },
     {
-      "file": "IMG_0237.JPG",
-      "caption": "Cada instante contigo vale oro 🏆"
+      "file": "IMG_0237.webp",
+      "caption": "Nuestras manos sosteniendo la cometa que llenó de color el día 🌈"
     },
     {
-      "file": "IMG_0278.JPG",
-      "caption": "Recuerdo hermoso de ti 💝"
+      "file": "IMG_0278.webp",
+      "caption": "Un beso frente al espejo antes de salir a crear más recuerdos 💋"
     },
     {
-      "file": "IMG_0287.JPG",
-      "caption": "Sonrisas que guardo en mi corazón 💓"
+      "file": "IMG_0287.webp",
+      "caption": "Una selfie rodeados por un túnel de luces brillantes ✨"
     },
     {
-      "file": "IMG_0306.JPG",
-      "caption": "Días inolvidables contigo 📸"
+      "file": "IMG_0306.webp",
+      "caption": "Flores moradas, luces de noche y nosotros en medio del paisaje 💜"
     },
     {
-      "file": "IMG_0381.JPG",
-      "caption": "Amor en cada detalle 🌹"
+      "file": "IMG_0381.webp",
+      "caption": "Una selfie en casa, sencilla y llena de esa sonrisa compartida 🏠"
     },
     {
-      "file": "IMG_9623.JPG",
-      "caption": "Mi persona favorita 🌙"
+      "file": "IMG_9623.webp",
+      "caption": "Nuestra llegada a El Edén, entre puertas de colores y luces cálidas 🚪"
     },
     {
-      "file": "IMG_9625.JPG",
-      "caption": "Juntos en todo lugar 🌎"
+      "file": "IMG_9625.webp",
+      "caption": "Un beso bajo el letrero de El Edén para recordar aquella noche 💕"
     },
     {
-      "file": "IMG_9768.JPG",
-      "caption": "Cuatro meses de pura magia ✨"
+      "file": "IMG_9768.webp",
+      "caption": "Abrazados mientras el atardecer pintaba de naranja toda la plaza 🧡"
     }
   ]
 }

@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "media:audit": "node scripts/optimize-media.mjs",
+    "media:optimize": "node scripts/optimize-media.mjs --apply"
   },
   "dependencies": {
+    "firebase": "^12.18.0",
     "next": "16.2.9",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -20,6 +23,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

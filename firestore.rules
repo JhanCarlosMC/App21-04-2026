@@ -1,0 +1,30 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAlbumMember(albumId) {
+      return request.auth != null
+        && exists(
+          /databases/$(database)/documents/albums/$(albumId)/members/$(request.auth.uid)
+        );
+    }
+
+    match /albums/{albumId} {
+      allow read: if isAlbumMember(albumId);
+      allow write: if false;
+    }
+
+    match /albums/{albumId}/members/{userId} {
+      allow read: if isAlbumMember(albumId);
+      allow write: if false;
+    }
+
+    match /albums/{albumId}/dates/{dateId} {
+      allow read, write: if isAlbumMember(albumId);
+    }
+
+    match /albums/{albumId}/memories/{memoryId} {
+      allow read, write: if isAlbumMember(albumId);
+    }
+  }
+}

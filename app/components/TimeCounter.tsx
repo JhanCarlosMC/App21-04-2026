@@ -16,9 +16,6 @@ export default function TimeCounter({ startDate }: { startDate: string }) {
       const start = new Date(startDate)
       const now = new Date()
 
-      // Diferencia total en milisegundos
-      const diffMs = now.getTime() - start.getTime()
-
       // Calcular meses completos
       const yearDiff = now.getFullYear() - start.getFullYear()
       const monthDiff = now.getMonth() - start.getMonth()
@@ -58,22 +55,25 @@ export default function TimeCounter({ startDate }: { startDate: string }) {
   }, [startDate])
 
   return (
-    <section className="time-counter">
-      <div className="heart-container">
-        <div className="months-label">Meses</div>
-        <div className="beating-heart">
-          <span className="heart-number">{time.months}</span>
+    <div className="time-counter" role="timer" aria-label="Tiempo que llevamos juntos">
+      <div className="time-content">
+        <div className="heart-container">
+          <div className="beating-heart">
+            <span className="heart-number">{time.months}</span>
+          </div>
         </div>
-        <div className="small-units">
-          <span className="unit">{time.days}d</span>
-          <span className="separator">:</span>
-          <span className="unit">{time.hours}h</span>
-          <span className="separator">:</span>
-          <span className="unit">{time.minutes}m</span>
-          <span className="separator">:</span>
-          <span className="unit">{time.seconds}s</span>
+        <div className="time-info">
+          <div className="small-units">
+            <span className="unit">{time.days}d</span>
+            <span className="separator">:</span>
+            <span className="unit">{time.hours}h</span>
+            <span className="separator">:</span>
+            <span className="unit">{time.minutes}m</span>
+            <span className="separator">:</span>
+            <span className="unit">{time.seconds}s</span>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
+import AuthGate from './components/AuthGate'
 import FloatingHearts from './components/FloatingHearts'
 import MonthNav from './components/MonthNav'
 
@@ -18,8 +19,8 @@ const sourceSans = Source_Sans_3({
 })
 
 export const metadata: Metadata = {
-  title: 'Nuestros Meses Juntos - Nuestro Álbum',
-  description: 'Un recap de todo lo bonito que hemos vivido juntos'
+  title: 'Nuestro Álbum de Amor',
+  description: 'Los recuerdos de una historia que seguimos escribiendo juntos'
 }
 
 export default function RootLayout({
@@ -30,9 +31,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${playfair.variable} ${sourceSans.variable}`}>
-        <FloatingHearts />
-        <MonthNav />
-        {children}
+        <AuthGate>
+          <FloatingHearts />
+          <MonthNav />
+          {children}
+        </AuthGate>
       </body>
     </html>
   )

@@ -1,0 +1,78 @@
+{
+  "slug": "sexto-mes",
+  "title": "Sexto Mes",
+  "description": "Medio año contigo, entre besos, flores y momentos sencillos que se vuelven inolvidables. Gracias por llenar de amor cada capítulo de nuestra historia; qué bonito seguir sumando recuerdos a tu lado.",
+  "timelineCaption": "Medio año entre rosas, besos y sonrisas 🌹💜",
+  "date": "Agosto – Septiembre 2026",
+  "order": 6,
+  "photos": [
+    {
+      "file": "1.Featured.webp",
+      "caption": "Un abrazo frente al espejo para guardar nuestro sexto mes juntos 🪞💕",
+      "featured": true
+    },
+    {
+      "file": "0.Carrucel.webp",
+      "caption": "Un beso entre flores y luces que pintaron la noche de violeta 💜"
+    },
+    {
+      "file": "0.Carrucel2.webp",
+      "caption": "Rosas rojas, montañas de fondo y un beso para recordar 🌹"
+    },
+    {
+      "file": "11909461-C2AD-4ED5-A176-D0A700ECE403.webp",
+      "caption": "Tres instantes de una noche llena de besos y sonrisas 🎞️"
+    },
+    {
+      "file": "IMG_1118.webp",
+      "caption": "Nuestra selfie entre flores y luces de colores ✨"
+    },
+    {
+      "file": "IMG_1140.webp",
+      "caption": "Un beso en tu mejilla mientras guardamos otra salida juntos 😘"
+    },
+    {
+      "file": "IMG_1434.webp",
+      "caption": "Sonrisas cerquita para otra foto de los dos 📸"
+    },
+    {
+      "file": "IMG_1435.webp",
+      "caption": "La siguiente foto siempre deja espacio para una ocurrencia 😄"
+    },
+    {
+      "file": "IMG_1465.web.mp4",
+      "caption": "Un abrazo en el espejo, ahora también en movimiento 🎬",
+      "poster": "IMG_1465.poster.webp"
+    },
+    {
+      "file": "IMG_1467.web.mp4",
+      "caption": "Gafas de colores y una sonrisa al aire libre ☁️",
+      "poster": "IMG_1467.poster.webp"
+    },
+    {
+      "file": "IMG_1473.web.mp4",
+      "caption": "Tu sonrisa detrás de las gafas, otro recuerdo de nuestra salida 🕶️",
+      "poster": "IMG_1473.poster.webp"
+    },
+    {
+      "file": "IMG_1514.webp",
+      "caption": "Juntos frente al espejo, listos para sumar otra historia 🪞"
+    },
+    {
+      "file": "IMG_1555.webp",
+      "caption": "Un ramo de rosas rojas con las montañas de fondo 💐"
+    },
+    {
+      "file": "IMG_1566.webp",
+      "caption": "Tú con tus rosas y esa sonrisa que tanto quiero 🌹"
+    },
+    {
+      "file": "IMG_1590.webp",
+      "caption": "Un beso junto a la cancha para cerrar el día contigo 💋"
+    },
+    {
+      "file": "IMG_1591.webp",
+      "caption": "Una última selfie junto a la cancha, felices de estar juntos 💞"
+    }
+  ]
+}

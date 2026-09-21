@@ -3,6 +3,7 @@ import TimeCounter from './components/TimeCounter'
 import ScrollingCarousel from './components/ScrollingCarousel'
 import History from './components/History'
 import DateAlbumPreview from './components/DateAlbumPreview'
+import YellowFlowersInvitation from './components/YellowFlowersInvitation'
 
 function numberToText(num: number): string {
   const units = ['', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve']
@@ -56,6 +57,7 @@ export default function HomePage() {
 
   return (
     <div className="container">
+      <YellowFlowersInvitation />
       <section className="hero">
         <p className="hero-eyebrow">{heroEyebrow}</p>
         <h1>{config.heroTitle}</h1>

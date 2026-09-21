@@ -1,8 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useYellowFlowersDay } from './YellowFlowersTheme'
+import { usePathname } from 'next/navigation'
 
 export default function FloatingHearts() {
+  const flowersDay = useYellowFlowersDay()
+  const pathname = usePathname()
+  const showFlowers = flowersDay || pathname === '/flores-amarillas'
   const [hearts, setHearts] = useState<Array<{ id: number; left: number; top: number; animationDelay: number; animationDuration: number }>>([])
   const [isMounted, setIsMounted] = useState(false)
 
@@ -29,7 +34,7 @@ export default function FloatingHearts() {
   }
 
   return (
-    <div className="floating-hearts">
+    <div className="floating-hearts" aria-hidden="true">
       {hearts.map((heart) => (
         <div
           key={heart.id}
@@ -41,7 +46,7 @@ export default function FloatingHearts() {
             animationDuration: `${heart.animationDuration}s`
           } as React.CSSProperties}
         >
-          ❤️
+          {showFlowers ? '✿' : '❤️'}
         </div>
       ))}
     </div>

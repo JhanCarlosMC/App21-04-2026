@@ -4,6 +4,15 @@
   padding: 0 20px;
 }
 
+:global([data-yellow-theme='true']) :is(.eyebrow, .kicker, .copy h2) { color: #886922; }
+:global([data-yellow-theme='true']) .copy p { color: #71603a; }
+:global([data-yellow-theme='true']) .preview { background: linear-gradient(135deg, #fffbee, #f5e4ad); border-color: #d8bc70; }
+:global([data-yellow-theme='true']) .openButton { background: linear-gradient(135deg, #a9852c, #785b21); }
+:global([data-yellow-theme='true']) .cover { background: linear-gradient(135deg, #b79744, #715321); }
+:global([data-yellow-theme='true']) .spine { background: linear-gradient(90deg, #554016, #896b2b, #554016); }
+:global([data-yellow-theme='true']) :is(.coverKicker, .ideaCount, .cover small) { color: #fff0c1; }
+:global([data-yellow-theme='true']) .coverHeart { background: #f4dda0; color: #806021; }
+
 .eyebrow {
   margin-bottom: 14px;
   color: #99423f;

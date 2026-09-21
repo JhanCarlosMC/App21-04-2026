@@ -18,6 +18,7 @@ import {
 import { doc, getDoc } from 'firebase/firestore'
 import { albumId, firebaseAuth, firestore } from '@/lib/firebase/client'
 import styles from './AuthGate.module.css'
+import { useYellowFlowersDay } from './YellowFlowersTheme'
 
 interface AuthContextValue {
   user: User
@@ -51,6 +52,7 @@ export function useAlbumAuth() {
 }
 
 export default function AuthGate({ children }: { children: ReactNode }) {
+  const flowersDay = useYellowFlowersDay()
   const [user, setUser] = useState<User | null>(null)
   const [status, setStatus] = useState<'loading' | 'signed-out' | 'ready'>('loading')
   const [email, setEmail] = useState('')
@@ -122,7 +124,7 @@ export default function AuthGate({ children }: { children: ReactNode }) {
     return (
       <main className={styles.authPage} aria-live="polite">
         <div className={styles.loadingCard}>
-          <span className={styles.heart} aria-hidden="true">♥</span>
+          <span className={styles.heart} aria-hidden="true">{flowersDay ? '✿' : '♥'}</span>
           <p>Abriendo nuestro álbum…</p>
         </div>
       </main>
@@ -133,10 +135,10 @@ export default function AuthGate({ children }: { children: ReactNode }) {
     return (
       <main className={styles.authPage}>
         <section className={styles.loginCard} aria-labelledby="login-title">
-          <p className={styles.eyebrow}>Un espacio solo para nosotros</p>
-          <span className={styles.heart} aria-hidden="true">♥</span>
+          <p className={styles.eyebrow}>{flowersDay ? 'Hoy hay flores amarillas para ti' : 'Un espacio solo para nosotros'}</p>
+          <span className={styles.heart} aria-hidden="true">{flowersDay ? '✿' : '♥'}</span>
           <h1 id="login-title">Abrir nuestro álbum</h1>
-          <p className={styles.intro}>Inicia sesión con una de las cuentas autorizadas.</p>
+          <p className={styles.intro}>{flowersDay ? 'Entra, mi amor. Te espera una sorpresa hecha para ti.' : 'Inicia sesión con una de las cuentas autorizadas.'}</p>
 
           <form onSubmit={handleSubmit} className={styles.form}>
             <label>

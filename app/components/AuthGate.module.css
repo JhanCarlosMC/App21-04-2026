@@ -167,6 +167,15 @@
   50% { transform: scale(1.08); }
 }
 
+:global([data-yellow-theme='true']) .authPage { background: radial-gradient(circle at 15% 10%, #fffef1, transparent 45%), linear-gradient(135deg, #fff7d9, #f6dda0); }
+:global([data-yellow-theme='true']) :is(.loginCard, .loadingCard) { background: #fffdf0d9; color: #69552d; box-shadow: 0 28px 80px #8a6a2320; }
+:global([data-yellow-theme='true']) :is(.eyebrow, .loginCard h1, .intro, .form label) { color: #796027; }
+:global([data-yellow-theme='true']) :is(.heart, .form button) { background: linear-gradient(135deg, #a37e25, #72531a); box-shadow: 0 10px 24px #80631f25; }
+:global([data-yellow-theme='true']) .heart { font-size: 1.6rem; }
+:global([data-yellow-theme='true']) .form input:focus { border-color: #aa852b; box-shadow: 0 0 0 3px #aa852b20; }
+:global([data-yellow-theme='true']) .sessionBar { color: #796027; background: #fffbedcc; border-color: #ac8c3930; }
+:global([data-yellow-theme='true']) .sessionBar button { background: #806321; }
+
 @media (max-width: 560px) {
   .sessionBar span {
     display: none;

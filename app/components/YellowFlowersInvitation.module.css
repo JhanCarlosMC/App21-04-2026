@@ -1,0 +1,16 @@
+.invitation { position: relative; display: flex; align-items: center; gap: 30px; max-width: 1120px; margin: 38px auto 12px; padding: 20px 60px 20px 24px; border: 1px solid #ddc37b; border-radius: 24px; background: radial-gradient(ellipse at 0% 80%, #ffe6a0, transparent 65%), #fffaf0; box-shadow: 0 18px 50px #90702015; overflow: hidden; }
+.bouquet { width: 180px; flex-shrink: 0; transform: rotate(-9deg); }
+.copy { max-width: 640px; }
+.eyebrow { font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: #80621f; font-weight: 600; margin-bottom: 10px; }
+.copy h2 { font-family: var(--font-playfair), Georgia, serif; font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 400; color: #55421c; line-height: 1.18; margin-bottom: 12px; }
+.copy > p:not(.eyebrow) { color: #766239; line-height: 1.5; }
+.link { display: inline-flex; gap: 25px; align-items: center; margin-top: 20px; padding: 12px 22px; background: #795b18; color: #fffaf0; text-decoration: none; border-radius: 999px; font-weight: 600; transition: background .2s; }
+.link:hover { background: #584111; }
+.link:focus-visible { outline: 3px solid #9b761e; outline-offset: 4px; }
+.note { position: absolute; right: -31px; top: 50%; transform: rotate(90deg); color: #8f753a; font-family: var(--font-playfair), Georgia, serif; font-style: italic; font-size: .8rem; }
+@media (max-width: 600px) {
+  .invitation { margin-top: 46px; padding: 22px; gap: 0; flex-direction: column; text-align: center; }
+  .bouquet { width: 130px; margin: -18px 0 -8px; }
+  .note { display: none; }
+  .eyebrow { font-size: .62rem; }
+}

@@ -13,6 +13,39 @@
     --color-pink-light: #FFD1DC;
 }
 
+/* The album returns to its usual palette after September 21 in Colombia.
+   The keepsake page retains its own yellow theme whenever it is visited. */
+body:has([data-yellow-theme='true']) {
+    --color-terracotta: #927023;
+    --color-gold: #C99A2E;
+    --color-cream: #FFFAE8;
+    --color-coral: #A67A1D;
+    --color-rose: #EAC65E;
+    --color-brown: #71603A;
+    --color-dark: #493D23;
+    --color-pink-light: #F6E3A5;
+    background: radial-gradient(circle at 10% 5%, #fffef4 0, transparent 35%),
+        radial-gradient(circle at 95% 30%, #f5d87555, transparent 40%), #FBF4DE;
+}
+
+[data-yellow-theme='true'] .hero h1 {
+    background-image: linear-gradient(135deg, #69511F, #B0882D, #715721);
+    filter: drop-shadow(0 8px 20px #8c711420);
+}
+[data-yellow-theme='true'] :is(.hero-eyebrow, .hero-flourish, .small-units, footer .signature) { color: #886922; }
+[data-yellow-theme='true'] .hero-content .subtitle { color: #695732; border-color: #b2974e66; }
+[data-yellow-theme='true'] :is(.time-counter, footer) { background: #fffbeecc; color: #695732; box-shadow: 0 18px 48px #87661c18; }
+[data-yellow-theme='true'] .beating-heart { background: #D8AF39; box-shadow: 0 12px 45px #a6812840; }
+[data-yellow-theme='true'] .month-nav { border-color: #b79a4840; box-shadow: 0 12px 30px #8c71141a; }
+[data-yellow-theme='true'] :is(.home-nav-link, .date-book-link) { color: #806221; background: #fff5d3; border-color: #b79a4840; }
+[data-yellow-theme='true'] .floating-heart { color: #d9b341; opacity: .23; }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    [data-yellow-theme='true'] .floating-heart,
+    [data-yellow-theme='true'] .beating-heart { animation: none; }
+}
+
 * {
     margin: 0;
     padding: 0;

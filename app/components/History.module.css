@@ -4,6 +4,14 @@
   margin: 24px 0;
 }
 
+:global([data-yellow-theme='true']) :is(.historyEyebrow, .historyTitle, .timelineMonth, .dragHint span) { color: #886922; }
+:global([data-yellow-theme='true']) :is(.dragHint, .timelineDate, .timelineCaption, .toggleBtn) { color: #71603a; }
+:global([data-yellow-theme='true']) .toggleBtn.active { background: linear-gradient(135deg, #a9852c, #785b21); color: white; border-color: #a9852c; }
+:global([data-yellow-theme='true']) .toggleBtn:hover { border-color: #a9852c; }
+:global([data-yellow-theme='true']) .timelineContainer { background: #fffbec99; box-shadow: 0 18px 48px #87661c18; }
+:global([data-yellow-theme='true']) .timelineDot { background: #c99a2e; }
+:global([data-yellow-theme='true']) .timelineLine { background: #c99a2e55; }
+
 .historyEyebrow {
   margin-bottom: 10px;
   color: #9F4540;

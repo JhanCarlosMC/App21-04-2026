@@ -1,42 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="background" x1="8" y1="5" x2="56" y2="59" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFF8F9"/>
-      <stop offset="1" stop-color="#FFD9E0"/>
+    <linearGradient id="rose" x1="40" y1="0" x2="480" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EDB9B5"/><stop offset=".5" stop-color="#D7878D"/><stop offset="1" stop-color="#AA5266"/>
     </linearGradient>
-    <linearGradient id="heart" x1="15" y1="27" x2="48" y2="56" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F76059"/>
-      <stop offset="1" stop-color="#D93D3D"/>
+    <linearGradient id="paper" x1="164" y1="130" x2="360" y2="385" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFCF0"/><stop offset="1" stop-color="#F5E5CD"/>
     </linearGradient>
-    <linearGradient id="flame" x1="36" y1="5" x2="45" y2="34" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFB13B"/>
-      <stop offset="0.55" stop-color="#FF7043"/>
-      <stop offset="1" stop-color="#E94843"/>
+    <linearGradient id="heart" x1="207" y1="210" x2="308" y2="302" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D77F85"/><stop offset="1" stop-color="#A54861"/>
     </linearGradient>
-    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
-      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#9E3038" flood-opacity="0.25"/>
-    </filter>
   </defs>
-
-  <rect x="2" y="2" width="60" height="60" rx="17" fill="url(#background)"/>
-  <rect x="2.75" y="2.75" width="58.5" height="58.5" rx="16.25" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-
-  <path
-    d="M39.2 6.5c2.7 6.2-.2 9.6-2.1 12.3-1.7 2.3-2.6 4.2-.9 7.1 1-3.3 3.2-5 5.1-7.1 2.1 3.2 5.7 6.7 5.7 11.9 0 7.4-5.9 12.2-13.2 12.2-7.1 0-12.6-4.7-12.6-11.5 0-7 5.3-10.5 9.1-14.5 3.1-3.2 6.5-5.8 8.9-10.4Z"
-    fill="url(#flame)"
-    filter="url(#shadow)"
-  />
-  <path
-    d="M34.1 37.2c-1.6-3.2-.4-5.7 1.5-8.6 2.8 3.3 4.5 5.5 4.5 8.4 0 3.3-2.5 5.9-6.2 5.9-3.6 0-6-2.3-6-5.5 0-2.7 1.7-4.7 4.2-7.1-.3 3.1.2 5.4 2 6.9Z"
-    fill="#FFD45C"
-  />
-
-  <path
-    d="M31.9 57.2C28.5 54.3 13 43.1 13 31.5c0-6.5 4.8-11.1 10.9-11.1 3.6 0 6.5 1.7 8.1 4.4 1.7-2.7 4.6-4.4 8.1-4.4 6.1 0 10.9 4.6 10.9 11.1 0 11.6-15.5 22.8-18.9 25.7h-.2Z"
-    fill="url(#heart)"
-    stroke="#C73538"
-    stroke-width="1.25"
-    filter="url(#shadow)"
-  />
-  <path d="M19.5 29.7c1.3-3.4 4.4-5.1 7.3-3.9" fill="none" stroke="#FFAAA5" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
+  <!-- Opaque, full-bleed artwork: the device supplies its own corner mask. -->
+  <path fill="url(#rose)" d="M0 0h512v512H0z"/>
+  <circle cx="60" cy="65" r="215" fill="#FFF5E6" opacity=".08"/>
+  <circle cx="477" cy="487" r="188" fill="#873E53" opacity=".08"/>
+  <g transform="rotate(-9 256 256)">
+    <rect x="142" y="132" width="242" height="282" rx="23" fill="#78384C" opacity=".15"/>
+    <rect x="132" y="114" width="242" height="284" rx="22" fill="#9B5360"/>
+    <rect x="142" y="120" width="227" height="272" rx="17" fill="#E3CEAC"/>
+    <path d="M160 380h194M160 385h192" stroke="#BA9A75" stroke-width="2" opacity=".5"/>
+    <rect x="132" y="110" width="238" height="268" rx="20" fill="url(#paper)"/>
+    <path d="M155 111v266" stroke="#D3B38B" stroke-width="3"/>
+    <rect x="171" y="133" width="177" height="220" rx="9" fill="none" stroke="#D2AE76" stroke-width="2"/>
+    <path d="M305 111v59l-14-9-14 9v-59" fill="#C19759"/>
+    <path d="M260 298c-9-7-63-43-63-77 0-18 13-30 30-30 14 0 25 8 33 19 8-11 19-19 33-19 17 0 30 12 30 30 0 34-54 70-63 77Z" fill="url(#heart)"/>
+    <path d="M211 219c3-10 12-14 20-11" fill="none" stroke="#F4BDB6" stroke-width="5" stroke-linecap="round"/>
+    <path d="M232 324h56" stroke="#C3A16A" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <path d="m399 116 6 18 18 6-18 6-6 18-6-18-18-6 18-6Z" fill="#FFF1C9"/>
+  <path d="m106 326 4 12 12 4-12 4-4 12-4-12-12-4 12-4Z" fill="#FFF1C9" opacity=".9"/>
 </svg>

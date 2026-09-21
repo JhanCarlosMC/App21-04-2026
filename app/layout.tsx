@@ -21,7 +21,13 @@ const sourceSans = Source_Sans_3({
 
 export const metadata: Metadata = {
   title: 'Nuestro Álbum de Amor',
-  description: 'Los recuerdos de una historia que seguimos escribiendo juntos'
+  description: 'Los recuerdos de una historia que seguimos escribiendo juntos',
+  applicationName: 'Álbum de Amor',
+  appleWebApp: {
+    capable: true,
+    title: 'Álbum de Amor',
+    statusBarStyle: 'default',
+  },
 }
 
 export default function RootLayout({

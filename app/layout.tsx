@@ -5,6 +5,7 @@ import AuthGate from './components/AuthGate'
 import FloatingHearts from './components/FloatingHearts'
 import MonthNav from './components/MonthNav'
 import YellowFlowersTheme from './components/YellowFlowersTheme'
+import BirthdaySurprise from './components/BirthdaySurprise'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -40,6 +41,7 @@ export default function RootLayout({
       <body className={`${playfair.variable} ${sourceSans.variable}`}>
         <YellowFlowersTheme>
           <AuthGate>
+            <BirthdaySurprise />
             <FloatingHearts />
             <MonthNav />
             {children}

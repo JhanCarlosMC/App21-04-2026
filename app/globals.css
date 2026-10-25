@@ -67,6 +67,12 @@ body {
     position: relative;
 }
 
+.album-shell {
+    --album-nav-space: 96px;
+    min-height: 100svh;
+    padding-right: var(--album-nav-space);
+}
+
 .month-nav {
     position: fixed;
     right: 18px;
@@ -82,11 +88,17 @@ body {
     border: 1px solid rgba(193, 86, 72, 0.18);
     box-shadow: 0 12px 30px rgba(199, 86, 72, 0.18);
     backdrop-filter: blur(12px);
+    max-height: calc(100dvh - 160px);
+    overflow-y: auto;
+    scrollbar-width: none;
 }
+
+.month-nav::-webkit-scrollbar { display: none; }
 
 .month-nav a {
     width: 38px;
     height: 38px;
+    flex-shrink: 0;
     display: grid;
     place-items: center;
     border-radius: 50%;
@@ -106,6 +118,7 @@ body {
 }
 
 .month-nav-divider {
+    flex-shrink: 0;
     width: 24px;
     height: 1px;
     margin: 1px auto;
@@ -259,8 +272,8 @@ body::before {
 }
 
 .recap-section {
-    width: 100vw;
-    margin: -8px calc(50% - 50vw) 32px;
+    width: calc(100% + 40px);
+    margin: -8px -20px 32px;
 }
 
 .recap-slide {
@@ -856,6 +869,23 @@ footer .signature {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .album-shell {
+        --album-nav-space: 0px;
+        padding-bottom: calc(80px + env(safe-area-inset-bottom));
+    }
+
+    .album-back-link {
+        display: inline-flex;
+        max-width: calc(100% - 64px);
+        align-items: center;
+    }
+
+    .recap-section {
+        width: calc(100% + 30px);
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
     .container {
         padding: 20px 15px 90px;
     }
@@ -871,12 +901,17 @@ footer .signature {
     .month-nav {
         top: auto;
         right: auto;
-        bottom: 14px;
+        bottom: max(14px, env(safe-area-inset-bottom));
         left: 50%;
         transform: translateX(-50%);
         flex-direction: row;
         padding: 7px;
         gap: 7px;
+        width: max-content;
+        max-width: calc(100vw - 24px);
+        max-height: none;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
 
     .month-nav a {
@@ -1247,7 +1282,12 @@ footer .signature {
 /* Scrolling Carousel */
 .scrolling-carousel-container {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  cursor: grab;
+  user-select: none;
   padding: 22px 0;
   background: rgba(255, 248, 250, 0.58);
   border-top: 1px solid rgba(255, 255, 255, 0.92);
@@ -1258,24 +1298,24 @@ footer .signature {
   backdrop-filter: blur(12px);
 }
 
+.scrolling-carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scrolling-carousel-container.is-dragging {
+  cursor: grabbing;
+}
+
+.scrolling-carousel-container:focus-visible {
+  outline: 3px solid var(--color-terracotta);
+  outline-offset: -3px;
+}
+
 .scrolling-carousel {
+  position: relative;
   display: flex;
   gap: 18px;
   width: max-content;
-  animation: scrollLeft 30s linear infinite;
-}
-
-.scrolling-carousel:hover {
-  animation-play-state: paused;
-}
-
-@keyframes scrollLeft {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-33.33%);
-  }
 }
 
 .carousel-slide {
@@ -1292,6 +1332,10 @@ footer .signature {
 .carousel-slide:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 25px rgba(199, 86, 72, 0.3);
+}
+
+.is-dragging .carousel-slide:hover {
+  transform: none;
 }
 
 .carousel-image {

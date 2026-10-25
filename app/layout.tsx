@@ -6,6 +6,8 @@ import FloatingHearts from './components/FloatingHearts'
 import MonthNav from './components/MonthNav'
 import YellowFlowersTheme from './components/YellowFlowersTheme'
 import BirthdaySurprise from './components/BirthdaySurprise'
+import MonthWelcome from './components/MonthWelcome'
+import { getAllMonths, getConfig } from '@/lib/content'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -36,12 +38,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const announcement = getConfig().announcement
+  const latestMonth = getAllMonths().at(-1)
+
   return (
-    <html lang="es">
+    <html lang="es" data-scroll-behavior="smooth">
       <body className={`${playfair.variable} ${sourceSans.variable}`}>
         <YellowFlowersTheme>
           <AuthGate>
             <BirthdaySurprise />
+            {announcement && announcement.monthSlug === latestMonth?.slug && (
+              <MonthWelcome announcement={announcement} />
+            )}
             <FloatingHearts />
             <MonthNav />
             {children}

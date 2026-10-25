@@ -4,6 +4,8 @@ import {
   createContext,
   useContext,
   useEffect,
+  useId,
+  useRef,
   useState,
   type FormEvent,
   type ReactNode
@@ -49,6 +51,67 @@ export function useAlbumAuth() {
   const context = useContext(AuthContext)
   if (!context) throw new Error('useAlbumAuth debe utilizarse dentro de AuthGate.')
   return context
+}
+
+function AccountMenu({ email, onSignOut }: { email: string | null; onSignOut: () => Promise<void> }) {
+  const [isOpen, setIsOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const panelId = useId()
+
+  useEffect(() => {
+    if (!isOpen) return
+    const closeOutside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !menuRef.current?.contains(event.target)) setIsOpen(false)
+    }
+    const closeWithEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+      setIsOpen(false)
+      triggerRef.current?.focus()
+    }
+    document.addEventListener('pointerdown', closeOutside)
+    document.addEventListener('keydown', closeWithEscape)
+    return () => {
+      document.removeEventListener('pointerdown', closeOutside)
+      document.removeEventListener('keydown', closeWithEscape)
+    }
+  }, [isOpen])
+
+  return (
+    <div
+      ref={menuRef}
+      className={styles.accountMenu}
+      onPointerEnter={(event) => { if (event.pointerType === 'mouse') setIsOpen(true) }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === 'mouse' && !event.currentTarget.contains(document.activeElement)) setIsOpen(false)
+      }}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false)
+      }}
+    >
+      <button
+        ref={triggerRef}
+        type="button"
+        className={styles.accountTrigger}
+        aria-label="Opciones de tu cuenta"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onClick={() => setIsOpen(open => !open)}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+          <circle cx="12" cy="8" r="3.5" />
+          <path d="M5 21v-2a7 7 0 0 1 14 0v2" strokeLinecap="round" />
+        </svg>
+      </button>
+      <div id={panelId} className={styles.accountPanel} hidden={!isOpen}>
+        <p className={styles.accountLabel}>Tu cuenta</p>
+        <p className={styles.accountEmail}>{email}</p>
+        <button type="button" className={styles.signOutButton} onClick={() => void onSignOut()}>
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export default function AuthGate({ children }: { children: ReactNode }) {
@@ -177,11 +240,8 @@ export default function AuthGate({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider value={{ user, signOut: () => signOut(firebaseAuth) }}>
-      <div className={styles.sessionBar}>
-        <span>{user.email}</span>
-        <button type="button" onClick={() => void signOut(firebaseAuth)}>Cerrar sesión</button>
-      </div>
-      {children}
+      <AccountMenu email={user.email} onSignOut={() => signOut(firebaseAuth)} />
+      <div className="album-shell">{children}</div>
     </AuthContext.Provider>
   )
 }

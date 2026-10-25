@@ -1,0 +1,65 @@
+.dialog {
+  position: fixed;
+  inset: 0;
+  width: min(620px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  overflow-y: auto;
+  color: #684346;
+  background: #fff8f7;
+  border: 1px solid #fff;
+  border-radius: 28px;
+  box-shadow: 0 30px 100px #59232f45;
+}
+
+.dialog::backdrop { background: #3e202b80; backdrop-filter: blur(7px); }
+:global(body):has(.dialog[open]) { overflow: hidden; }
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: #fff8f7f5;
+  border-bottom: 1px solid #e8c8cb;
+  font-size: .8rem;
+}
+
+.toolbar button {
+  width: 38px;
+  height: 38px;
+  color: #934744;
+  background: #fff;
+  border: 1px solid #e8c8cb;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.content { padding: 22px 38px 30px; text-align: center; }
+.heart { display: block; color: #bc514e; font-size: 3rem; line-height: 1.2; }
+.eyebrow { margin: 12px 0; color: #a15350; font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+.content h2 { margin-bottom: 20px; color: #8e3d3b; font-family: var(--font-playfair), Georgia, serif; font-size: clamp(1.9rem, 5vw, 2.7rem); line-height: 1.15; }
+.message { margin-top: 16px; line-height: 1.65; font-size: 1rem; }
+.closing { margin: 22px 0; color: #a14b48; font-family: var(--font-playfair), Georgia, serif; font-style: italic; line-height: 1.6; }
+.primaryAction { display: inline-flex; align-items: center; justify-content: center; gap: 16px; padding: 13px 22px; color: white; background: #ab4944; border-radius: 999px; text-decoration: none; font-weight: 600; }
+.primaryAction:hover { background: #8e3d3b; }
+.dismiss { display: block; margin: 18px auto 0; padding: 6px; color: #805456; background: transparent; border: 0; font: inherit; font-size: .85rem; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.dialog :is(button, a):focus-visible, .invitation:focus-visible { outline: 3px solid #b75e59; outline-offset: 3px; }
+
+.invitation { display: flex; align-items: center; gap: 14px; width: min(570px, calc(100% - 32px)); margin: 24px auto 0; padding: 16px 20px; color: #914541; background: #fff6f3; border: 1px solid #e8c8cb; border-radius: 18px; text-align: left; font: inherit; cursor: pointer; }
+.invitation > span:first-child { font-size: 2rem; }
+.invitation > span:last-child { margin-left: auto; }
+.invitation small { display: block; margin-top: 5px; font-size: .78rem; color: #855e5e; }
+
+@media (max-width: 600px) {
+  .dialog { width: calc(100% - 20px); max-height: calc(100dvh - 20px); border-radius: 22px; }
+  .content { padding: 18px 22px 24px; }
+  .message { font-size: .93rem; line-height: 1.6; }
+  .primaryAction { width: 100%; gap: 8px; padding: 13px 16px; }
+}

@@ -141,38 +141,39 @@ export default function History({ items }: HistoryProps) {
             onKeyDown={scrollTimelineWithKeyboard}
             onDragStart={(event) => event.preventDefault()}
           >
-            <div className={styles.timelineLine} />
+            <div className={styles.timelineTrack}>
+              <div className={styles.timelineLine} aria-hidden="true" />
 
-            {items.map((item) => (
-              <Link
-                key={`${item.month}-${item.index}`}
-                href={`/meses/${item.month}`}
-                className={styles.timelineItem}
-              >
-                <div className={styles.timelineDot} />
-                <div className={styles.timelineContent}>
-                  <div className={styles.timelineImage}>
-                    <Image
-                      src={`/meses/${item.month}/${item.photo.file}`}
-                      alt={item.photo.caption}
-                      width={160}
-                      height={120}
-                      className={styles.timelineThumbnail}
-                      sizes="(max-width: 768px) 100px, 160px"
-                      loading={item.index === 1 ? 'eager' : 'lazy'}
-                      draggable={false}
-                    />
+              {items.map((item) => (
+                <Link
+                  key={`${item.month}-${item.index}`}
+                  href={`/meses/${item.month}`}
+                  className={styles.timelineItem}
+                >
+                  <div className={styles.timelineDot} />
+                  <div className={styles.timelineContent}>
+                    <div className={styles.timelineImage}>
+                      <Image
+                        src={`/meses/${item.month}/${item.photo.file}`}
+                        alt={item.photo.caption}
+                        width={160}
+                        height={120}
+                        className={styles.timelineThumbnail}
+                        sizes="(max-width: 768px) 100px, 160px"
+                        loading={item.index === 1 ? 'eager' : 'lazy'}
+                        draggable={false}
+                      />
+                    </div>
+                    <div className={styles.timelineInfo}>
+                      <div className={styles.timelineMonth}>{item.monthTitle}</div>
+                      {item.monthDate && <div className={styles.timelineDate}>{item.monthDate}</div>}
+                      <div className={styles.timelineCaption}>{item.photo.caption}</div>
+                    </div>
                   </div>
-                  <div className={styles.timelineInfo}>
-                    <div className={styles.timelineMonth}>{item.monthTitle}</div>
-                    {item.monthDate && <div className={styles.timelineDate}>{item.monthDate}</div>}
-                    <div className={styles.timelineCaption}>{item.photo.caption}</div>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
 
-            <div className={styles.timelineLineEnd} />
+            </div>
           </div>
         </>
       ) : (

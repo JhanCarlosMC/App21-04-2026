@@ -642,6 +642,10 @@
 }
 
 .modalHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff9fa;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -934,8 +938,8 @@
 
 @media (max-width: 620px) {
   .section {
-    width: 100vw;
-    margin: 48px calc(50% - 50vw) 8px;
+    width: calc(100% + 32px);
+    margin: 48px -16px 8px;
     padding: 48px 16px;
     border-right: 0;
     border-left: 0;
@@ -1013,7 +1017,7 @@
 
   .modal {
     width: 100%;
-    max-height: 92vh;
+    max-height: 92dvh;
     border-radius: 25px 25px 0 0;
   }
 

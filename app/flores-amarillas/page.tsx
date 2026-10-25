@@ -19,7 +19,7 @@ export default function YellowFlowersPage() {
   return (
     <main className={styles.page}>
       <header className={styles.topbar}>
-        <Link href="/">← Volver a nuestro álbum</Link>
+        <Link className="album-back-link" href="/">← Volver a nuestro álbum</Link>
         <span>Un detalle para mi persona favorita</span>
       </header>
 

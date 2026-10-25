@@ -18,11 +18,21 @@ export interface Month {
   photos: Photo[]
 }
 
+export interface MonthAnnouncement {
+  monthSlug: string
+  eyebrow: string
+  title: string
+  paragraphs: string[]
+  closing: string
+  buttonLabel: string
+}
+
 export interface Config {
   startDate: string
   heroTitle: string
   heroSubtitle: string
   messages: string[]
+  announcement?: MonthAnnouncement
   recapPhotos: Array<{ month: string; file: string; caption: string; poster?: string }>
 }
 

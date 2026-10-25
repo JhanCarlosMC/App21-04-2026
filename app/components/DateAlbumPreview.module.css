@@ -309,9 +309,9 @@
 
 @media (max-width: 520px) {
   .wrapper {
-    width: 100vw;
-    margin-right: calc(50% - 50vw);
-    margin-left: calc(50% - 50vw);
+    width: calc(100% + 30px);
+    margin-right: -15px;
+    margin-left: -15px;
     padding: 0;
   }
 

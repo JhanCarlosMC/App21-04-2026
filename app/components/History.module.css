@@ -132,11 +132,19 @@
   display: none;
 }
 
+.timelineTrack {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  width: max-content;
+  min-width: 100%;
+}
+
 .timelineLine {
   position: absolute;
   left: 0;
   right: 0;
-  top: 51px;
+  top: 9px;
   height: 2px;
   background: linear-gradient(
     to right,
@@ -249,16 +257,6 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.timelineLineEnd {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  width: 30px;
-  height: 3px;
-  background: linear-gradient(to left, rgba(199, 86, 72, 0.4), transparent);
-  z-index: 1;
 }
 
 /* Cards Styles */
@@ -425,6 +423,14 @@
     padding: 0;
   }
 
+  .timelineTrack {
+    position: static;
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    gap: 16px;
+  }
+
   .timelineItem:hover {
     transform: translateX(3px);
   }
@@ -495,10 +501,6 @@
   .timelineCaption {
     font-size: 0.78rem;
     line-height: 1.4;
-  }
-
-  .timelineLineEnd {
-    display: none;
   }
 
   .cardsGrid {

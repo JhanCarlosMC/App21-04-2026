@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useAlbumAuth } from './AuthGate'
 import { dateIdeas, type DateIdea } from '@/lib/dateIdeas'
 import {
@@ -480,7 +481,7 @@ export default function DateAlbum() {
         <p className={styles.empty}>No encontramos una cita con esos filtros.</p>
       )}
 
-      {activeIdea && activeTitle && (
+      {activeIdea && activeTitle && createPortal(
         <div
           className={styles.modalBackdrop}
           onMouseDown={(event) => {
@@ -617,7 +618,8 @@ export default function DateAlbum() {
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   )

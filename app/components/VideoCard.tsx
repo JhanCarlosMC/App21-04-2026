@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useState, type SyntheticEvent } from 'react'
 import styles from './VideoCard.module.css'
 
 interface VideoCardProps {
@@ -15,109 +15,46 @@ interface VideoCardProps {
 }
 
 export default function VideoCard({ monthSlug, photo, index }: VideoCardProps) {
-  const [isPlaying, setIsPlaying] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [naturalRatio, setNaturalRatio] = useState<string>()
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const animationDelay = index * 0.05
-
   const src = `/meses/${monthSlug}/${photo.file}`
   const poster = photo.poster ? `/meses/${monthSlug}/${photo.poster}` : undefined
-
-  useEffect(() => {
-    const video = videoRef.current
-
-    if (!video) {
-      return
-    }
-
-    const updateNaturalRatio = () => {
-      if (video.videoWidth > 0 && video.videoHeight > 0) {
-        setNaturalRatio(`${video.videoWidth} / ${video.videoHeight}`)
-      }
-    }
-
-    updateNaturalRatio()
-    video.addEventListener('loadedmetadata', updateNaturalRatio)
-
-    return () => video.removeEventListener('loadedmetadata', updateNaturalRatio)
-  }, [src])
-
-  const handleTogglePlay = () => {
-    if (!videoRef.current) {
-      return
-    }
-
-    if (isPlaying) {
-      videoRef.current.pause()
-      setIsPlaying(false)
-    } else {
-      videoRef.current.play()
-        .then(() => {
-          setIsPlaying(true)
-        })
-        .catch((err) => {
-          console.error('Play error:', err)
-          setHasError(true)
-        })
-    }
-  }
-
-  const handleEnded = () => {
-    setIsPlaying(false)
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0
-    }
-  }
-
   const cardClass = photo.featured
     ? `${styles.videoCard} ${styles.featured}`
     : styles.videoCard
 
   return (
-    <div
-      className={cardClass}
-      style={{ animationDelay: `${animationDelay}s` }}
-    >
+    <div className={cardClass} style={{ animationDelay: `${index * 0.05}s` }}>
       <div className={styles.polaroidFrame}>
         <div
           className={styles.videoContainer}
-          style={naturalRatio ? { aspectRatio: naturalRatio } : undefined}
+          style={!photo.featured && naturalRatio ? { aspectRatio: naturalRatio } : undefined}
         >
           <video
-            ref={videoRef}
             src={src}
             poster={poster}
-            muted
+            controls
             playsInline
-            className={`${styles.video} ${isPlaying ? styles.playing : ''}`}
-            controls={isPlaying}
-            onEnded={handleEnded}
-            onError={() => setHasError(true)}
+            className={styles.video}
+            aria-label={photo.caption}
             preload="metadata"
-          />
-
-          {!isPlaying && (
-            <button
-              type="button"
-              className={styles.playOverlay}
-              onClick={handleTogglePlay}
-              aria-label="Reproducir video"
-            >
-              {poster ? (
-                <div className={styles.thumbnail} style={{ backgroundImage: `url(${poster})` }} />
-              ) : (
-                <div className={styles.thumbnailPlaceholder} />
-              )}
-              <div className={styles.thumbnailOverlay} />
-              <div className={styles.playIconWrapper}>
-                <div className={`${styles.playIcon} ${hasError ? styles.error : ''}`}>
-                  {hasError ? '✕' : '▶'}
-                </div>
-              </div>
-            </button>
-          )}
+            onLoadedMetadata={(event: SyntheticEvent<HTMLVideoElement>) => {
+              const { videoWidth, videoHeight } = event.currentTarget
+              if (videoWidth > 0 && videoHeight > 0) {
+                setNaturalRatio(`${videoWidth} / ${videoHeight}`)
+              }
+            }}
+            onLoadedData={() => setHasError(false)}
+            onError={() => setHasError(true)}
+          >
+            Tu navegador no puede reproducir este video. <a href={src}>Abrir el video</a>.
+          </video>
         </div>
+        {hasError && (
+          <p className={styles.errorMessage} role="alert">
+            No pudimos reproducir este recuerdo. <a href={src}>Abrir el video</a>.
+          </p>
+        )}
         <div className={styles.caption}>
           {photo.featured && <span className={styles.featuredLabel}>Video destacado</span>}
           <span>{photo.caption}</span>

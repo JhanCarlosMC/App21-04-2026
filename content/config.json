@@ -2,6 +2,17 @@
   "startDate": "2026-03-21T23:00:00",
   "heroTitle": "Nuestro Álbum de Amor",
   "heroSubtitle": "Contigo, cada instante se vuelve recuerdo y cada recuerdo, una razón más para amarte.",
+  "announcement": {
+    "monthSlug": "septimo-mes",
+    "eyebrow": "Un nuevo capítulo de nosotros",
+    "title": "Siete meses contigo, mi amor",
+    "paragraphs": [
+      "Felices siete meses, mi amor. Gracias por cada abrazo, cada sonrisa y por hacer tan bonita nuestra historia. Contigo, hasta los días más sencillos se vuelven recuerdos que quiero guardar para siempre.",
+      "Ya está lista la página de nuestro séptimo mes, con nuestras fotos, videos y todos esos momentos que tanto significan para mí. Ven a revivirlos conmigo y vuelve siempre que quieras recordar lo bonito que es ser nosotros. Este pedacito de nuestra historia se queda aquí para ti."
+    ],
+    "closing": "Te amo. Por este mes y por todos los que nos faltan. ♡",
+    "buttonLabel": "Ver nuestro séptimo mes"
+  },
   "messages": [
     "En estos dos meses, me has enseñado que el amor verdadero no se mide en tiempo, sino en la cantidad de momentos que nos hacen sonreír.",
     "Cada mes tiene sus propias historias, pero mi favorita sigue siendo la que estamos escribiendo juntos día a día.",
@@ -72,6 +83,16 @@
       "month": "sexto-mes",
       "file": "0.Carrucel2.webp",
       "caption": "Medio año contigo, entre rosas y besos que quiero repetir 🌹"
+    },
+    {
+      "month": "septimo-mes",
+      "file": "0.Carrucel.webp",
+      "caption": "Siete meses contigo y un beso que quiero guardar para siempre 🪞💕"
+    },
+    {
+      "month": "septimo-mes",
+      "file": "0.Carrucel2.webp",
+      "caption": "Una noche de besos y detalles para seguir celebrando lo nuestro 🌙💐"
     }
   ]
 }

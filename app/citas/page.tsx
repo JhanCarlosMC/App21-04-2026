@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function DatesPage() {
   return (
     <main className={styles.page}>
-      <Link href="/" className={styles.backLink}>← Volver a nuestro álbum</Link>
+      <Link href="/" className={`${styles.backLink} album-back-link`}>← Volver a nuestro álbum</Link>
       <DateAlbum />
 
       <footer>

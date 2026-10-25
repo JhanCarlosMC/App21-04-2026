@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function BirthdayPage() {
   return (
     <main className={styles.page}>
-      <Link className={styles.back} href="/">← Volver a nuestro álbum</Link>
+      <Link className={`${styles.back} album-back-link`} href="/">← Volver a nuestro álbum</Link>
       <BirthdayContent titleId="birthday-page-title" />
     </main>
   )

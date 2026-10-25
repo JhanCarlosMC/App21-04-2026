@@ -24,7 +24,7 @@ export default async function MonthPage({ params }: { params: Promise<{ mes: str
 
   return (
     <div className="container month-page">
-      <Link href="/" className="back-link">
+      <Link href="/" className="back-link album-back-link">
         <span aria-hidden="true">←</span>
         Nuestro álbum
       </Link>

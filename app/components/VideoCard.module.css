@@ -41,93 +41,22 @@
   height: 100%;
   display: block;
   object-fit: contain;
-  pointer-events: none;
 }
 
-.video.playing {
-  pointer-events: auto;
+.video:focus-visible {
+  outline: 3px solid white;
+  outline-offset: -3px;
 }
 
-.playOverlay {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  padding: 0;
-  overflow: hidden;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  z-index: 10;
+.errorMessage {
+  margin: 12px 8px 0;
+  color: #7E3535;
+  text-align: center;
 }
 
-.playOverlay:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.95);
-  outline-offset: -6px;
-}
-
-.thumbnail,
-.thumbnailPlaceholder,
-.thumbnailOverlay {
-  position: absolute;
-  inset: 0;
-}
-
-.thumbnail {
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  filter: brightness(0.78) saturate(0.9);
-  transition: transform 0.55s ease, filter 0.4s ease;
-  z-index: 1;
-}
-
-.videoCard:hover .thumbnail {
-  transform: scale(1.045);
-  filter: brightness(0.88) saturate(0.95);
-}
-
-.thumbnailPlaceholder {
-  background: linear-gradient(135deg, #F4D9DE, #DFA7B1);
-  z-index: 1;
-}
-
-.thumbnailOverlay {
-  background: linear-gradient(to top, rgba(28, 10, 14, 0.38), transparent 65%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-.playIconWrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 62px;
-  height: 62px;
-  display: grid;
-  place-items: center;
-  background: rgba(222, 77, 70, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.78);
-  border-radius: 50%;
-  box-shadow: 0 12px 28px rgba(32, 10, 14, 0.34);
-  transform: translate(-50%, -50%);
-  transition: transform 0.3s ease, background 0.3s ease;
-  z-index: 3;
-}
-
-.playOverlay:hover .playIconWrapper {
-  background: #D94D45;
-  transform: translate(-50%, -50%) scale(1.08);
-}
-
-.playIcon {
-  margin-left: 3px;
-  color: white;
-  font-size: 20px;
-}
-
-.playIcon.error {
-  margin-left: 0;
-  font-size: 24px;
+.errorMessage a {
+  color: inherit;
+  text-decoration: underline;
 }
 
 .caption {
@@ -228,8 +157,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .videoCard,
-  .thumbnail {
+  .videoCard {
     animation: none;
     opacity: 1;
     transition: none;

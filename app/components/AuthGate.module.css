@@ -127,39 +127,57 @@
   text-align: center;
 }
 
-.sessionBar {
+.accountMenu {
   position: fixed;
   z-index: 220;
-  top: 14px;
-  left: 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: calc(100vw - 100px);
-  padding: 7px 8px 7px 12px;
-  color: #704648;
-  background: rgba(255, 250, 250, 0.74);
-  border: 1px solid rgba(176, 79, 76, 0.16);
-  border-radius: 999px;
+  top: max(14px, env(safe-area-inset-top));
+  right: max(18px, env(safe-area-inset-right));
+  padding-bottom: 8px;
+  color: var(--color-brown);
+}
+
+.accountTrigger {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-terracotta);
+  background: rgba(255, 250, 250, 0.94);
+  border: 1px solid rgba(176, 79, 76, 0.2);
+  border-radius: 50%;
   box-shadow: 0 8px 22px rgba(124, 45, 50, 0.12);
   backdrop-filter: blur(12px);
-  font-size: 0.72rem;
+  cursor: pointer;
 }
 
-.sessionBar span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.accountTrigger svg { width: 22px; height: 22px; }
+.accountTrigger:hover { background: white; }
+.accountTrigger:focus-visible,
+.signOutButton:focus-visible { outline: 3px solid var(--color-terracotta); outline-offset: 3px; }
+
+.accountPanel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: min(280px, calc(100vw - 36px));
+  padding: 18px;
+  background: rgba(255, 250, 250, 0.97);
+  border: 1px solid rgba(176, 79, 76, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 14px 36px rgba(124, 45, 50, 0.17);
+  backdrop-filter: blur(16px);
 }
 
-.sessionBar button {
-  padding: 6px 9px;
+.accountLabel { margin-bottom: 5px; font-weight: 700; font-size: 0.9rem; }
+.accountEmail { margin-bottom: 16px; overflow-wrap: anywhere; font-size: 0.82rem; }
+.signOutButton {
+  width: 100%;
+  padding: 10px 14px;
   color: white;
-  background: #a43e3c;
+  background: var(--color-terracotta);
   border: 0;
   border-radius: 999px;
-  font: 600 0.68rem 'Source Sans 3', sans-serif;
-  white-space: nowrap;
+  font: 600 0.85rem 'Source Sans 3', sans-serif;
   cursor: pointer;
 }
 
@@ -173,14 +191,10 @@
 :global([data-yellow-theme='true']) :is(.heart, .form button) { background: linear-gradient(135deg, #a37e25, #72531a); box-shadow: 0 10px 24px #80631f25; }
 :global([data-yellow-theme='true']) .heart { font-size: 1.6rem; }
 :global([data-yellow-theme='true']) .form input:focus { border-color: #aa852b; box-shadow: 0 0 0 3px #aa852b20; }
-:global([data-yellow-theme='true']) .sessionBar { color: #796027; background: #fffbedcc; border-color: #ac8c3930; }
-:global([data-yellow-theme='true']) .sessionBar button { background: #806321; }
+:global([data-yellow-theme='true']) :is(.accountTrigger, .accountPanel) { background: #fffbedf5; border-color: #ac8c3930; }
+
 
 @media (max-width: 560px) {
-  .sessionBar span {
-    display: none;
-  }
-
   .loginCard,
   .loadingCard {
     border-radius: 24px;
